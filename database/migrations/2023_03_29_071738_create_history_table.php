@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tipe', function (Blueprint $table) {
+        Schema::create('history', function (Blueprint $table) {
             $table->integer('id', true);
-            $table->string('nama', 100);
-            $table->text('deskripsi');
+            $table->string('user_id', 36)->index('user_id');
+            $table->integer('id_produk')->index('id_produk');
         });
     }
 
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tipe');
+        Schema::dropIfExists('history');
     }
 };

@@ -1,0 +1,85 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "beli",
+    "dateExported": "2023-03-29T07:03:24.043Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "5a2b028a-cce9-44be-b99d-62cc8f7aa430",
+            "colId": "24f78c48-62e9-458d-937a-0d80c8430156",
+            "containerId": "",
+            "name": "Beli",
+            "url": "localhost:8000/api/user/beli",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2023-03-29T06:44:03.686Z",
+            "modified": "2023-03-29T06:57:43.912Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formdata",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "user_id",
+                        "value": "10908cc8-2ff7-43a6-bdd4-8a27f619951f"
+                    },
+                    {
+                        "name": "id_produk",
+                        "value": "1"
+                    }
+                ]
+            },
+            "tests": []
+        },
+        {
+            "_id": "4240b6e5-b2c9-48a0-ac6a-46c4b1effded",
+            "colId": "24f78c48-62e9-458d-937a-0d80c8430156",
+            "containerId": "",
+            "name": "Top Up",
+            "url": "localhost:8000/api/user/top_up",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2023-03-29T06:56:55.923Z",
+            "modified": "2023-03-29T06:57:52.099Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formdata",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "user_id",
+                        "value": "10908cc8-2ff7-43a6-bdd4-8a27f619951f"
+                    },
+                    {
+                        "name": "jumlah",
+                        "value": "50000"
+                    }
+                ]
+            },
+            "tests": []
+        },
+        {
+            "_id": "cde2f31e-4e6d-4a7a-a980-2fa12719b7bb",
+            "colId": "24f78c48-62e9-458d-937a-0d80c8430156",
+            "containerId": "",
+            "name": "Riwayat",
+            "url": "localhost:8000/api/user/riwayat?user_id=10908cc8-2ff7-43a6-bdd4-8a27f619951f",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2023-03-29T07:00:26.979Z",
+            "modified": "2023-03-29T07:00:46.373Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "user_id",
+                    "value": "10908cc8-2ff7-43a6-bdd4-8a27f619951f",
+                    "isPath": false
+                }
+            ],
+            "tests": []
+        }
+    ]
+}

@@ -13,9 +13,11 @@ class UserController extends Controller
     {
         $this->res = $rescon;
     }
+    // username, password, vpassword
     public function create(Request $req){
         if(DB::table("users")->where("username", "=", $req->username)->exists())
-        return $this->failed("Username sudah digunakan!");
+        return $this->res->failed("Username sudah digunakan!");
+        if($req->password != $req->vpassword) return $this->res->failed("Verifikasi password salah!");
 
         $uuid = Str::uuid()->toString();
         DB::table("users")->insert([
@@ -26,6 +28,7 @@ class UserController extends Controller
         ]);
         return $this->res->success($uuid);
     }
+    // username, password
     public function login(Request $req){
         if(DB::table("users")->where("username", "=", $req->username)->where("password", "=", $req->password)->exists()){
             return $this->res->success();

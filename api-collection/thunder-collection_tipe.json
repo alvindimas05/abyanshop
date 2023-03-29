@@ -1,0 +1,135 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "tipe",
+    "dateExported": "2023-03-29T07:03:19.033Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "be10b816-7952-43fc-a524-231b687649b0",
+            "colId": "5b8bc0aa-8409-40a5-9dbd-b8a3ff80b687",
+            "containerId": "",
+            "name": "Get",
+            "url": "localhost:8000/api/tipe",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2023-03-29T03:46:57.902Z",
+            "modified": "2023-03-29T03:47:15.808Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "a092c293-f599-40a9-b8b9-c4e5e290938f",
+            "colId": "5b8bc0aa-8409-40a5-9dbd-b8a3ff80b687",
+            "containerId": "",
+            "name": "Tambah",
+            "url": "localhost:8000/api/tipe",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2023-03-29T03:47:20.588Z",
+            "modified": "2023-03-29T03:53:50.737Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formdata",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "admin_id",
+                        "value": "b200dd03-c4a5-11ed-ac36-2cf05de802d0"
+                    },
+                    {
+                        "name": "nama",
+                        "value": "Mobile Legends"
+                    },
+                    {
+                        "name": "deskripsi",
+                        "value": "Lorem ipsum dolor sit amet"
+                    },
+                    {
+                        "name": "kolom",
+                        "value": "user_id,server"
+                    }
+                ]
+            },
+            "tests": []
+        },
+        {
+            "_id": "b409af22-bc81-4e39-a91e-9dc368a76f13",
+            "colId": "5b8bc0aa-8409-40a5-9dbd-b8a3ff80b687",
+            "containerId": "",
+            "name": "Edit",
+            "url": "localhost:8000/api/tipe",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2023-03-29T03:51:01.175Z",
+            "modified": "2023-03-29T03:55:04.138Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formdata",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "admin_id",
+                        "value": "b200dd03-c4a5-11ed-ac36-2cf05de802d0"
+                    },
+                    {
+                        "name": "nama",
+                        "value": "Mobile Legends"
+                    },
+                    {
+                        "name": "deskripsi",
+                        "value": "Lorem ipsum dolor aseli amet"
+                    },
+                    {
+                        "name": "id",
+                        "value": "1"
+                    },
+                    {
+                        "name": "_method",
+                        "value": "PUT"
+                    },
+                    {
+                        "name": "kolom",
+                        "value": "user_id,server"
+                    }
+                ]
+            },
+            "tests": []
+        },
+        {
+            "_id": "24b85a87-3171-48e3-ac19-9d088c41102d",
+            "colId": "5b8bc0aa-8409-40a5-9dbd-b8a3ff80b687",
+            "containerId": "",
+            "name": "Delete",
+            "url": "localhost:8000/api/tipe",
+            "method": "POST",
+            "sortNum": 40000,
+            "created": "2023-03-29T03:51:53.300Z",
+            "modified": "2023-03-29T03:55:44.770Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formdata",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "admin_id",
+                        "value": "b200dd03-c4a5-11ed-ac36-2cf05de802d0"
+                    },
+                    {
+                        "name": "id_tipe",
+                        "value": "1"
+                    },
+                    {
+                        "name": "_method",
+                        "value": "DELETE"
+                    }
+                ]
+            },
+            "tests": []
+        }
+    ]
+}
