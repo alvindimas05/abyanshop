@@ -7,6 +7,9 @@
     <title>Document</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.min.css" rel="stylesheet">
+    
 </head>
 <body>
     <nav class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded ">
@@ -99,7 +102,7 @@
                        <input class="py-2 px-4 rounded-xl" type="text" name="price" id="price" readonly>
                        
                       <div></div>
-                    <div><button class="py-3 px-6 text-base text-white bg-orange-600 rounded-full hover:bg-orange-700 float-right">Pesan Sekarang</button></div>
+                    <div><button class="py-3 px-6 text-base text-white bg-orange-600 rounded-full hover:bg-orange-700 float-right" onclick="beli()">Pesan Sekarang</button></div>
                   </div>   
                 </div>
             </div>
@@ -317,7 +320,7 @@
     }
 </style>
 <script>
-    function readmore() {
+  function readmore() {
     var connector = document.getElementById("connector");
     var fullText = document.getElementById("full");
     var btnread = document.getElementById("btnread");
@@ -325,11 +328,30 @@
     if (connector.style.display === "inline") {
         btnread.innerHTML = "Baca Selengkapnya";
         fullText.style.display = "none";
-    } else{
+    } else {
         connector.style.display = "none";
         btnread.style.display = "none";
         fullText.style.display = "inline";
     }
+  }
+  function beli(){
+    Swal.fire({
+    title: 'Are you sure?',
+    text: "You won't be able to revert this!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, delete it!'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Swal.fire(
+        'Deleted!',
+        'Your file has been deleted.',
+        'success'
+      );
+    }
+  });
 }
 </script>
 </html> 
