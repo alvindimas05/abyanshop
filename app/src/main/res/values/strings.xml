@@ -1,0 +1,4 @@
+<resources>
+    <string name="url">https://localhost:8000</string>
+    <string name="app_name">Abyan Shop</string>
+</resources>

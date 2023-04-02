@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:orientation="horizontal"
+        android:background="#FF5722">
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/searchView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:iconifiedByDefault="false"
+            android:background="#FFF"
+            app:queryHint="Sekrul Piew">
+
+        </androidx.appcompat.widget.SearchView>
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="72dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/tes" />
+    </LinearLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp"
+        android:scrollbars="none">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:orientation="vertical">
+            <LinearLayout
+                android:id="@+id/main_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+                <androidx.cardview.widget.CardView
+                    android:layout_width="185dp"
+                    android:layout_height="match_parent"
+                    android:backgroundTint="#FF5722"
+                    app:cardCornerRadius="5dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginBottom="5dp"
+                        android:fontFamily="@font/poppins_medium"
+                        android:text="TextView"
+                        android:textColor="#FFF"
+                        android:textSize="15dp" />
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="170dp"
+                        android:scaleType="centerCrop"
+                        app:srcCompat="@drawable/tes" />
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="185dp"
+                    android:layout_height="205dp"
+                    android:layout_marginLeft="20dp"
+                    android:backgroundTint="#FF5722"
+                    app:cardCornerRadius="5dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginBottom="5dp"
+                        android:fontFamily="@font/poppins_medium"
+                        android:text="TextView"
+                        android:textColor="#FFF"
+                        android:textSize="15dp" />
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="170dp"
+                        android:scaleType="centerCrop"
+                        app:srcCompat="@drawable/tes" />
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
