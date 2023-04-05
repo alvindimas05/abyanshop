@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class TipeController extends Controller
 {
@@ -13,7 +14,7 @@ class TipeController extends Controller
         $this->res = $rescon;
     }
     public function isTipeExist($id){
-        return DB::table("tipe")->where("user_id", "=", $id)->exists();
+        return DB::table("tipe")->where("id", "=", $id)->exists();
     }
     public function get(){
         $data = DB::table("tipe")->get();
@@ -21,21 +22,29 @@ class TipeController extends Controller
     }
     // admin_id, nama, deskripsi
     public function add(Request $req){
+        $req->validate(["image" => "mimes:jpg,jpeg,png|max:3000"]);
+
         if(!$this->res->isAdmin($req->admin_id))
         return $this->res->failed("Admin not found!");
-        DB::table("tipe")->insertOrIgnore([
+        $id = DB::table("tipe")->insertGetId([
             "id" => null,
             "nama" => $req->nama,
             "deskripsi" => $req->deskripsi,
             "kolom" => $req->kolom  
         ]);
+        $req->file("image")->move(public_path()."/images", $id);
         return $this->res->success();
     }
-    // admin_id, id, nama, deskripsi
+    // admin_id, id, nama, deskripsi, image
     public function edit(Request $req){
+        if($req->hasFile("image")){
+            $req->validate(["image" => "mimes:jpg,jpeg,png|max:3000"]);
+            $req->file("image")->move(public_path()."/images", $req->id);
+        }
+
         if(!$this->res->isAdmin($req->admin_id)) return $this->res->failed();
         if(!$this->isTipeExist($req->id)) return $this->res->failed("Type not found!");
-        DB::table("tipe")->update([
+        DB::table("tipe")->where("id", "=", $req->id)->update([
             "nama" => $req->nama,
             "deskripsi" => $req->deskripsi,
             "kolom" => $req->kolom

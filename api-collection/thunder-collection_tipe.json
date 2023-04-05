@@ -1,35 +1,40 @@
 {
     "client": "Thunder Client",
     "collectionName": "tipe",
-    "dateExported": "2023-03-29T07:03:19.033Z",
+    "dateExported": "2023-04-05T07:14:07.851Z",
     "version": "1.1",
     "folders": [],
     "requests": [
         {
-            "_id": "be10b816-7952-43fc-a524-231b687649b0",
-            "colId": "5b8bc0aa-8409-40a5-9dbd-b8a3ff80b687",
+            "_id": "9538457d-3a39-469c-b9a3-554f899a5a56",
+            "colId": "e8864a27-0e0b-42b6-ad17-05eda24d0e6a",
             "containerId": "",
             "name": "Get",
             "url": "localhost:8000/api/tipe",
             "method": "GET",
             "sortNum": 10000,
-            "created": "2023-03-29T03:46:57.902Z",
-            "modified": "2023-03-29T03:47:15.808Z",
+            "created": "2023-04-05T02:57:24.396Z",
+            "modified": "2023-04-05T02:57:24.396Z",
             "headers": [],
             "params": [],
             "tests": []
         },
         {
-            "_id": "a092c293-f599-40a9-b8b9-c4e5e290938f",
-            "colId": "5b8bc0aa-8409-40a5-9dbd-b8a3ff80b687",
+            "_id": "a44dffbd-27b4-4517-a688-9ba2789443f9",
+            "colId": "e8864a27-0e0b-42b6-ad17-05eda24d0e6a",
             "containerId": "",
             "name": "Tambah",
             "url": "localhost:8000/api/tipe",
             "method": "POST",
             "sortNum": 20000,
-            "created": "2023-03-29T03:47:20.588Z",
-            "modified": "2023-03-29T03:53:50.737Z",
-            "headers": [],
+            "created": "2023-04-05T02:57:24.397Z",
+            "modified": "2023-04-05T05:54:23.893Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "application/json"
+                }
+            ],
             "params": [],
             "body": {
                 "type": "formdata",
@@ -37,11 +42,11 @@
                 "form": [
                     {
                         "name": "admin_id",
-                        "value": "b200dd03-c4a5-11ed-ac36-2cf05de802d0"
+                        "value": "291ce616-d362-11ed-b141-2cf05de80474"
                     },
                     {
                         "name": "nama",
-                        "value": "Mobile Legends"
+                        "value": "Pengangguran Simulator"
                     },
                     {
                         "name": "deskripsi",
@@ -51,21 +56,32 @@
                         "name": "kolom",
                         "value": "user_id,server"
                     }
+                ],
+                "files": [
+                    {
+                        "name": "image",
+                        "value": "c:\\Users\\USER\\Downloads\\1122299.jpg"
+                    }
                 ]
             },
             "tests": []
         },
         {
-            "_id": "b409af22-bc81-4e39-a91e-9dc368a76f13",
-            "colId": "5b8bc0aa-8409-40a5-9dbd-b8a3ff80b687",
+            "_id": "0db7903e-d291-44bf-8437-75a95e15fc84",
+            "colId": "e8864a27-0e0b-42b6-ad17-05eda24d0e6a",
             "containerId": "",
             "name": "Edit",
             "url": "localhost:8000/api/tipe",
             "method": "POST",
             "sortNum": 30000,
-            "created": "2023-03-29T03:51:01.175Z",
-            "modified": "2023-03-29T03:55:04.138Z",
-            "headers": [],
+            "created": "2023-04-05T02:57:24.398Z",
+            "modified": "2023-04-05T05:54:01.276Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "application/json"
+                }
+            ],
             "params": [],
             "body": {
                 "type": "formdata",
@@ -73,7 +89,7 @@
                 "form": [
                     {
                         "name": "admin_id",
-                        "value": "b200dd03-c4a5-11ed-ac36-2cf05de802d0"
+                        "value": "291ce616-d362-11ed-b141-2cf05de80474"
                     },
                     {
                         "name": "nama",
@@ -95,20 +111,26 @@
                         "name": "kolom",
                         "value": "user_id,server"
                     }
+                ],
+                "files": [
+                    {
+                        "name": "image",
+                        "value": "c:\\Users\\USER\\Downloads\\pngwing.com (19).png"
+                    }
                 ]
             },
             "tests": []
         },
         {
-            "_id": "24b85a87-3171-48e3-ac19-9d088c41102d",
-            "colId": "5b8bc0aa-8409-40a5-9dbd-b8a3ff80b687",
+            "_id": "4d37950a-9bf6-4e6a-952b-214812e4f00b",
+            "colId": "e8864a27-0e0b-42b6-ad17-05eda24d0e6a",
             "containerId": "",
             "name": "Delete",
             "url": "localhost:8000/api/tipe",
             "method": "POST",
             "sortNum": 40000,
-            "created": "2023-03-29T03:51:53.300Z",
-            "modified": "2023-03-29T03:55:44.770Z",
+            "created": "2023-04-05T02:57:24.399Z",
+            "modified": "2023-04-05T02:57:24.399Z",
             "headers": [],
             "params": [],
             "body": {
