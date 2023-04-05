@@ -16,8 +16,10 @@ class TipeController extends Controller
     public function isTipeExist($id){
         return DB::table("tipe")->where("id", "=", $id)->exists();
     }
-    public function get(){
-        $data = DB::table("tipe")->get();
+    public function get(Request $req){
+        $data = DB::table("tipe");
+        if($req->has("id_tipe")) $data = $data->where("id", "=", $req->id_tipe)->get()->first();
+        else $data = $data->get();
         return $this->res->success($data);
     }
     // admin_id, nama, deskripsi

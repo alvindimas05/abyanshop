@@ -15,8 +15,10 @@ class ProdukController extends Controller
     public function isProdukExist($id){
         return DB::table("produk")->where("id", "=", $id)->exists();
     }
-    public function get(){
-        $data = DB::table("produk")->get();
+    public function get(Request $req){
+        $data = DB::table("produk");
+        if($req->has("id_tipe")) $data = $data->where("id_tipe", "=", $req->id_tipe);
+        $data = $data->get();
         return $this->res->success($data);
     }
     // admin_id, nama, harga, id_tipe
