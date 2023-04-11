@@ -3,13 +3,17 @@ package com.aseli.abyanshop;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -19,6 +23,7 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
@@ -27,10 +32,22 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getSupportActionBar().hide();
 
+        new GetData(this).execute();
+    }
+}
+class GetData extends AsyncTask<Void, Void, Void>{
+    Activity activity;
+    public GetData(Activity activity){
+        this.activity = activity;
+    }
+    @Override
+    protected Void doInBackground(Void... voids){
         try {
-            URL url = new URL(getResources().getString(R.string.url));
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            String url = activity.getResources().getString(R.string.url);
+            URL api = new URL(url + "tipe");
+            HttpURLConnection conn = (HttpURLConnection) api.openConnection();
             conn.setRequestMethod("GET");
             conn.setRequestProperty("Content-Type", "application/json");
             conn.setRequestProperty("Accept", "application/json");
@@ -53,26 +70,28 @@ public class MainActivity extends AppCompatActivity {
             JSONObject obj = new JSONObject(builder.toString());
             JSONArray data = obj.getJSONArray("data");
 
-            LinearLayout ll = findViewById(R.id.main_view);
-            LinearLayout parent = (LinearLayout) ll.getParent();
+            ScrollView main_layout = activity.findViewById(R.id.main_view);
 
             for(int i = 0; i < data.length(); i += 2){
-                for(int j = 0; j < 1; j++){
-                    CardView view = (CardView) ll.getChildAt(j);
-                    TextView text = (TextView) view.getChildAt(j);
-                    ImageView image = (ImageView) view.getChildAt(j);
-                    JSONObject dat = data.getJSONObject(i + (j > 0 ? 1 : 0));
-
-                    text.setText(dat.getString("nama"));
-                    InputStream is = (InputStream) new URL(url + "/images/" + data.getInt(i)).getContent();
-                    Bitmap bm = BitmapFactory.decodeStream(is);
-                    image.setImageBitmap(bm);
+                LinearLayout layout = (LinearLayout) activity.getLayoutInflater().inflate(R.layout.tipe, null);
+                for(int j = 0; j < (i + 1 < data.length() ? 2 : 1); j++){
+                    JSONObject dat = data.getJSONObject(i);
+                    CardView card = (CardView) layout.getChildAt(i);
+                    InputStream is = (InputStream) new URL(url + "../images/" + dat.getInt("id")).getContent();
+                    ((ImageView) card.getChildAt(0)).setImageBitmap(BitmapFactory.decodeStream(is));
+                    ((TextView) card.getChildAt(1)).setText(dat.getString("nama"));
+                    if(i + 1 >= data.length()) card.setVisibility(View.VISIBLE);
                 }
-                parent.addView(ll);
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        main_layout.addView(layout);
+                    }
+                });
             }
-            parent.removeView(ll);
         } catch (Exception e){
             Log.w("Error Data", e);
         }
+        return null;
     }
 }

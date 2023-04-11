@@ -1,4 +1,4 @@
 <resources>
-    <string name="url">https://localhost:8000</string>
+    <string name="url">http://ancritbat.my.id/api/</string>
     <string name="app_name">Abyan Shop</string>
 </resources>
