@@ -1,2 +1,2 @@
-const url = 'http://192.168.58.21:8000/api/',
+const url = 'http://ancritbat.my.id/api/',
 url_img = url + "../images/";
