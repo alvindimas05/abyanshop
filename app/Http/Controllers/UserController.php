@@ -30,7 +30,7 @@ class UserController extends Controller
     }
     public function details(Request $req){
         $data = DB::table("users")->where("user_id", "=", $req->user_id)->first(["username", "saldo"]);
-        $this->res->success($data);
+        return $this->res->success($data);
     }
     // username, password
     public function login(Request $req){
