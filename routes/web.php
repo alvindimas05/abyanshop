@@ -11,6 +11,7 @@ $tipe = TipeController::class;
 $produk = ProdukController::class;
 $beli = PembelianController::class;
 
+Route::get("/api/user", [$user, "details"]);
 Route::post("/api/user", [$user, "create"]);
 Route::post("/api/user/login", [$user, "login"]);
 Route::post("/api/user/beli", [$beli, "beli"]);
