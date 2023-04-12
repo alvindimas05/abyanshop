@@ -71,23 +71,29 @@ class GetData extends AsyncTask<Void, Void, Void>{
             JSONArray data = obj.getJSONArray("data");
 
             ScrollView main_layout = activity.findViewById(R.id.main_view);
+            LinearLayout layout = null;
 
-            for(int i = 0; i < data.length(); i += 2){
-                LinearLayout layout = (LinearLayout) activity.getLayoutInflater().inflate(R.layout.tipe, null);
-                for(int j = 0; j < (i + 1 < data.length() ? 2 : 1); j++){
-                    JSONObject dat = data.getJSONObject(i);
-                    CardView card = (CardView) layout.getChildAt(i);
-                    InputStream is = (InputStream) new URL(url + "../images/" + dat.getInt("id")).getContent();
-                    ((ImageView) card.getChildAt(0)).setImageBitmap(BitmapFactory.decodeStream(is));
-                    ((TextView) card.getChildAt(1)).setText(dat.getString("nama"));
-                    if(i + 1 >= data.length()) card.setVisibility(View.VISIBLE);
-                }
-                activity.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        main_layout.addView(layout);
-                    }
-                });
+            boolean second = false;
+            for(int i = 0; i < data.length(); i++){
+                if(!second) layout = (LinearLayout) activity.getLayoutInflater().inflate(R.layout.tipe, null);
+
+                JSONObject dat = data.getJSONObject(i);
+                CardView card = (CardView) layout.getChildAt(i);
+                InputStream is = (InputStream) new URL(url + "../images/" + dat.getInt("id")).getContent();
+                ((ImageView) card.getChildAt(0)).setImageBitmap(BitmapFactory.decodeStream(is));
+                ((TextView) card.getChildAt(1)).setText(dat.getString("nama"));
+                card.setVisibility(View.VISIBLE);
+
+                if(second){
+                    second = false;
+                    LinearLayout finalLayout = layout;
+                    activity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            main_layout.addView(finalLayout);
+                        }
+                    });
+                } else second = true;
             }
         } catch (Exception e){
             Log.w("Error Data", e);

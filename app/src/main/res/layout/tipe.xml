@@ -14,10 +14,11 @@
         android:backgroundTint="#000"
         android:layout_weight="1"
         android:layout_marginRight="5dp"
+        android:visibility="visible"
         app:cardCornerRadius="5dp">
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="170dp"
+            android:layout_height="200dp"
             android:scaleType="centerCrop"
             android:src="@drawable/tes" />
         <TextView
@@ -41,7 +42,7 @@
         app:cardCornerRadius="5dp">
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="170dp"
+            android:layout_height="200dp"
             android:scaleType="centerCrop"
             android:src="@drawable/tes" />
 
