@@ -56,11 +56,13 @@ class TipeController extends Controller
     // admin_id, id_tipe
     public function delete(Request $req){
         if(!$this->res->isAdmin($req->admin_id)) return $this->res->failed();
-        if(!$this->isTipeExist($req->id)) return $this->res->failed("Type not found!");
+        if(!$this->isTipeExist($req->id_tipe)) return $this->res->failed("Type not found!");
         
-        if(DB::table("produk")->where("id_tipe", "=", $req->id_tipe))
+        if(!DB::table("produk")->where("id_tipe", "=", $req->id_tipe)->exists())
         DB::table("tipe")->where("id", "=", $req->id_tipe)->delete();
         else return $this->res->failed("Type are used!");
+
+        unlink(public_path() + "/images/" + $req->id);
         return $this->res->success();
     }
 }
