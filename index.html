@@ -58,12 +58,12 @@
     </div>
   </nav>
 
-  <div class="md:grid md:grid-cols-2 mx-auto my-8 bg-orange-400 container">
-    <img id="bannergambar" class="w-full rounded-xl p-8 mx-auto lg:w-2/3" alt="placeholder">
-    <div class="p-8 md:p-0">
-      <div class="py-4 font-bold text-lg" id="bannerjudul">
+  <div class="md:grid md:grid-cols-2 mx-auto my-8 bg-orange-400 container rounded-lg">
+    <img id="bannergambar" class="w-full h-full rounded-b-lg mx-auto md:rounded-lg lg:p-4" alt="placeholder">
+    <div class="ml-6 p-8 md:p-0">
+      <div class="py-4 font-bold text-lg lg:text-2xl" id="bannerjudul">
       </div>
-      <span id="bannerdeskripsi"></span>
+      <span class="font-semibold text-base lg:text-lg" id="bannerdeskripsi"></span>
     </div>
   </div>
 
@@ -176,14 +176,16 @@
 
       data.data.forEach(dat => {
         $("#gamelainnya, #gamepopuler").append(`
-        <div class="p-3 my-4 mx-5 rounded-xl bg-yellow-300 shadow-lg hover:drop-shadow-2xl hover:transform hover:scale-105">
+        <a href="purchase.html?id=${dat.id}">
+          <div class="p-3 my-4 mx-5 rounded-xl bg-yellow-300 shadow-lg hover:drop-shadow-2xl hover:transform hover:scale-105 transition transform delay-50">
           <div class="max-w-sm overflow-hidden">
             <img class="w-full h-[200px] rounded-xl" src="${url_img + dat.id}">
             <div class="px-6 py-4">
               <div class="font-bold md:text-lg lg:text-xl text-center">${dat.nama}</div>
             </div>
           </div>
-        </div>
+        </div>  
+        </a>
         `);
       });
       var pertama = data.data[0];

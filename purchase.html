@@ -60,9 +60,9 @@
         </div>
       </nav>
 
-      <div class="container p-8 mx-auto my-8 bg-orange-400 md:grid md:grid-cols-2 rounded-xl">
-        <img id="bannergambar" class="w-full rounded-lg lg:m-4 lg:w-2/3 ">
-        <div class="py-4 px-4 font-bold text-3xl mx-auto">
+      <div class="container mx-auto my-8 bg-orange-400 md:grid md:grid-cols-2 rounded-xl">
+        <img id="bannergambar" class="w-full h-full rounded-b-lg mx-auto md:rounded-lg lg:p-4">
+        <div class="py-4 px-4 font-bold text-xl lg:text-3xl mx-auto">
           <span  id="bannerjudul"></span>
             <div class="text-lg font-semibold mt-3">
               <span id="bannerdeskripsi"></span>
@@ -224,20 +224,6 @@
     }
 </style>
 <script>
-  function readmore() {
-    var connector = document.getElementById("connector");
-    var fullText = document.getElementById("full");
-    var btnread = document.getElementById("btnread");
-
-    if (connector.style.display === "inline") {
-        btnread.innerHTML = "Baca Selengkapnya";
-        fullText.style.display = "none";
-    } else {
-        connector.style.display = "none";
-        btnread.style.display = "none";
-        fullText.style.display = "inline";
-    }
-  }
   function beli(){
     Swal.fire({
     title: 'Apakah kamu yakin membeli ini?',
@@ -252,15 +238,16 @@
     if (result.isConfirmed) {
         Swal.fire(
           'Pembelian sukses!',
-          'Terimakasih.Transaksimu akan segera diproses :)',
+          'Terimakasih, Transaksimu akan segera diproses.',
           'success'
         );
       }
     });
   }
-  async function main(){
-    var param = new URLSearchParams(location.search.substring(1));
+  var param = new URLSearchParams(location.search.substring(1));
     var id = param.get('id');
+
+  async function main(){
     var tipe = await fetch(url + "tipe?id_tipe=" + id); //mengambil data dari api
       tipe = await tipe.json(); //mengubah data menjadi json
       console.log(tipe.data);
@@ -280,7 +267,7 @@
       `);
     });
 
-    var produk = await fetch(url + "produk?id_tipe" + id);
+    var produk = await fetch(url + "produk?id_tipe=" + id);
     produk = await produk.json();
     produk = produk.data;
     form.append(`
@@ -320,6 +307,7 @@
 
     data.data.forEach(dat => {
       $("#gamelainnya").append(`
+      <a href="purchase.html?id=${dat.id}">
       <div class="p-3 my-4 mx-5 rounded-xl bg-yellow-300 shadow-lg hover:drop-shadow-2xl hover:transform hover:scale-105">
             <div class="max-w-sm overflow-hidden">
               <img class="w-full rounded-xl" src="${url_img + dat.id}">
@@ -328,6 +316,7 @@
               </div>
             </div>
           </div> 
+          </a>
       `);
     });
   }
