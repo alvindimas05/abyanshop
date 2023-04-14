@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
@@ -38,9 +39,17 @@ public class MainActivity extends AppCompatActivity {
     }
 }
 class GetData extends AsyncTask<Void, Void, Void>{
+    private ProgressDialog pd;
     Activity activity;
     public GetData(Activity activity){
+
         this.activity = activity;
+        pd = new ProgressDialog(activity);
+    }
+    @Override
+    protected void onPreExecute(){
+        pd.setMessage("Loading...");
+        pd.show();
     }
     @Override
     protected Void doInBackground(Void... voids){
@@ -99,5 +108,9 @@ class GetData extends AsyncTask<Void, Void, Void>{
             Log.w("Error Data", e);
         }
         return null;
+    }
+    @Override
+    protected void onPostExecute(Void result){
+        pd.dismiss();
     }
 }
