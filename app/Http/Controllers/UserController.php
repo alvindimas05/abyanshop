@@ -34,8 +34,9 @@ class UserController extends Controller
     }
     // username, password
     public function login(Request $req){
-        if(DB::table("users")->where("username", "=", $req->username)->where("password", "=", $req->password)->exists()){
-            return $this->res->success();
+        $user = DB::table("users")->where("username", "=", $req->username)->where("password", "=", $req->password);
+        if($user->exists()){
+            return $this->res->success($user->get(["user_id"])->first()->user_id);
         } else {
             return $this->res->failed();
         }
