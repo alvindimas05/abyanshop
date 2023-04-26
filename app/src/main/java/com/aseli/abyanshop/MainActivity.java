@@ -5,12 +5,13 @@ import androidx.cardview.widget.CardView;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -20,29 +21,35 @@ import android.widget.TextView;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getSupportActionBar().hide();
 
-        new GetData(this).execute();
+        new ProdukTask(this).execute();
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        menu.findItem(R.id.main_menu_akun).setOnMenuItemClickListener(item -> {
+            SharedPreferences settings = getSharedPreferences("user_data", Context.MODE_PRIVATE);
+            if(!settings.contains("user_id")){
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+            return false;
+        });
+        return true;
     }
 }
-class GetData extends AsyncTask<Void, Void, Void>{
+class ProdukTask extends AsyncTask<Void, Void, List<LinearLayout>> {
     private ProgressDialog pd;
-    Activity activity;
-    public GetData(Activity activity){
-
+    private Activity activity;
+    public ProdukTask(Activity activity){
         this.activity = activity;
         pd = new ProgressDialog(activity);
     }
@@ -52,65 +59,52 @@ class GetData extends AsyncTask<Void, Void, Void>{
         pd.show();
     }
     @Override
-    protected Void doInBackground(Void... voids){
+    protected List<LinearLayout> doInBackground(Void... voids){
         try {
-            String url = activity.getResources().getString(R.string.url);
-            URL api = new URL(url + "tipe");
-            HttpURLConnection conn = (HttpURLConnection) api.openConnection();
-            conn.setRequestMethod("GET");
-            conn.setRequestProperty("Content-Type", "application/json");
-            conn.setRequestProperty("Accept", "application/json");
-
-            if(conn.getResponseCode() != HttpURLConnection.HTTP_OK){
-                throw new Exception("Failed to connect to the server!");
-            }
-
-            InputStream stream = conn.getInputStream();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
-            StringBuilder builder = new StringBuilder();
-
-            String line;
-            while ((line = reader.readLine()) != null) {
-                builder.append(line);
-            }
-            reader.close();
-            stream.close();
-
-            JSONObject obj = new JSONObject(builder.toString());
+            JSONObject obj = new JSONRequest()
+                    .setPath("tipe")
+                    .setMethod(JSONRequest.HTTP_GET)
+                    .execute();
             JSONArray data = obj.getJSONArray("data");
 
-            ScrollView main_layout = activity.findViewById(R.id.main_view);
             LinearLayout layout = null;
-
             boolean second = false;
+            List<LinearLayout> layouts = new ArrayList<>();
             for(int i = 0; i < data.length(); i++){
-                if(!second) layout = (LinearLayout) activity.getLayoutInflater().inflate(R.layout.tipe, null);
+                if(!second) layout = (LinearLayout) activity.getLayoutInflater().inflate(R.layout.main_tipe, null);
 
                 JSONObject dat = data.getJSONObject(i);
-                CardView card = (CardView) layout.getChildAt(i);
-                InputStream is = (InputStream) new URL(url + "../images/" + dat.getInt("id")).getContent();
-                ((ImageView) card.getChildAt(0)).setImageBitmap(BitmapFactory.decodeStream(is));
+                int id = dat.getInt("id");
+                String kolom = dat.getString("kolom");
+                CardView card = (CardView) layout.getChildAt(second ? 1 : 0);
+                ImageView image = (ImageView) card.getChildAt(0);
+
+                new ImageFromURL(image, id).setImage(activity);
                 ((TextView) card.getChildAt(1)).setText(dat.getString("nama"));
                 card.setVisibility(View.VISIBLE);
+                card.setOnClickListener(v -> {
+                    Intent intent = new Intent(activity, PembelianActivity.class);
+                    intent.putExtra("id", id);
+                    intent.putExtra("kolom", kolom);
+                    activity.startActivity(intent);
+                });
 
-                if(second){
+                if(second || i == data.length() - 1){
                     second = false;
-                    LinearLayout finalLayout = layout;
-                    activity.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            main_layout.addView(finalLayout);
-                        }
-                    });
+                    layouts.add(layout);
                 } else second = true;
             }
+            return layouts;
         } catch (Exception e){
-            Log.w("Error Data", e);
+            Log.w("Produk Task", e);
         }
         return null;
     }
     @Override
-    protected void onPostExecute(Void result){
+    protected void onPostExecute(List<LinearLayout> result){
         pd.dismiss();
+        ScrollView main_layout = activity.findViewById(R.id.main_view);
+        for(LinearLayout layout : result)
+            main_layout.addView(layout);
     }
 }

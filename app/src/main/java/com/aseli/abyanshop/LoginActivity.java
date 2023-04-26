@@ -14,7 +14,6 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -31,19 +30,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
-    LoginTask task;
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        getSupportActionBar().hide();
     }
     public void onLogin(View v){
-        task = new LoginTask(this);
-        task.execute();
-    }
-    public void onPause(){
-        task.cancel(true);
-        super.onPause();
+        new LoginTask(this).execute();
     }
 }
 class LoginTask extends AsyncTask<Void, Void, JSONObject> {
@@ -58,39 +52,17 @@ class LoginTask extends AsyncTask<Void, Void, JSONObject> {
     }
     public JSONObject doInBackground(Void... voids){
         try {
-            String url = activity.getResources().getString(R.string.url);
-            URL api = new URL(url + "user/login");
-            HttpURLConnection conn = (HttpURLConnection) api.openConnection();
-            HashMap<String, String> postData = new HashMap<String, String>();
+            // Set parameter username dan password ke hashmap
+            HashMap<String, String> postData = new HashMap<>();
             postData.put("username", ((EditText) activity.findViewById(R.id.login_username)).getText().toString());
             postData.put("password", ((EditText) activity.findViewById(R.id.login_password)).getText().toString());
 
-            conn.setRequestMethod("POST");
-            conn.setDoInput(true);
-            conn.setDoOutput(true);
-
-            OutputStream os = conn.getOutputStream();
-            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
-            writer.write(getPostDataString(postData));
-            writer.flush();
-            writer.close();
-            os.close();
-
-            if(conn.getResponseCode() != HttpURLConnection.HTTP_OK) throw new Exception("Error Login!");
-
-            InputStream stream = conn.getInputStream();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
-            StringBuilder builder = new StringBuilder();
-
-            String line;
-            while ((line = reader.readLine()) != null) {
-                builder.append(line);
-            }
-            reader.close();
-            stream.close();
-
-            JSONObject obj = new JSONObject(builder.toString());
-            return obj;
+            // Mengambil hasil
+            return new JSONRequest()
+                    .setMethod(JSONRequest.HTTP_POST)
+                    .setPath("user/login")
+                    .setData(postData)
+                    .execute();
         } catch (Exception e){
             Log.w("Login Error", e);
         }
@@ -99,9 +71,9 @@ class LoginTask extends AsyncTask<Void, Void, JSONObject> {
     @Override
     protected void onPostExecute(JSONObject obj){
         try {
-            Boolean success = obj != null && obj.getBoolean("status");
+            boolean success = obj != null && obj.getBoolean("status");
             if(success){
-                SharedPreferences settings = activity.getSharedPreferences("user_data", 0);
+                SharedPreferences settings = activity.getSharedPreferences("user_data", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = settings.edit();
                 editor.putString("user_id", obj.getString("data"));
                 editor.apply();
@@ -114,27 +86,12 @@ class LoginTask extends AsyncTask<Void, Void, JSONObject> {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.cancel();
+                            if(success) activity.finish();
                         }
                     })
                     .show();
         } catch (Exception e) {
             Log.w("Login Error", e);
         }
-    }
-    private String getPostDataString(HashMap<String, String> params) throws UnsupportedEncodingException {
-        StringBuilder result = new StringBuilder();
-        boolean first = true;
-        for(Map.Entry<String, String> entry : params.entrySet()){
-            if (first)
-                first = false;
-            else
-                result.append("&");
-
-            result.append(URLEncoder.encode(entry.getKey(), "UTF-8"));
-            result.append("=");
-            result.append(URLEncoder.encode(entry.getValue(), "UTF-8"));
-        }
-
-        return result.toString();
     }
 }

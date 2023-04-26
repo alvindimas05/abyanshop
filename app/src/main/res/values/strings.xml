@@ -1,4 +1,4 @@
 <resources>
-    <string name="url">http://ancritbat.my.id/api/</string>
+    <string name="url">http://ancritbat.my.id:8880/api/</string>
     <string name="app_name">Abyan Shop</string>
 </resources>
