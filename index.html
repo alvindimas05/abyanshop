@@ -62,7 +62,7 @@
     </div>
   </nav>
 
-  <div class="md:grid md:grid-cols-2 mx-auto my-8 bg-orange-400 container rounded-lg">
+  <div class="md:grid md:grid-cols-2 mx-auto my-8 bg-orange-400 container rounded-lg" id="banner">
     <img id="bannergambar" class="w-full h-full rounded-b-lg mx-auto md:rounded-lg lg:p-4" alt="placeholder">
     <div class="ml-6 p-8 md:p-0">
       <div class="py-4 font-bold text-xl text-center md:mb-4 md:text-2xl lg:text-4xl" id="bannerjudul">
@@ -176,11 +176,12 @@
 </footer>
 
   <script>
+    let DATA;
     async function main(){
       var data = await fetch(url + "tipe"); //mengambil data dari api
       data = await data.json(); //mengubah data menjadi json
-      console.log(data.data);
 
+      DATA = data.data;
       data.data.forEach(dat => {
         $("#gamelainnya, #gamepopuler").append(`
         <a href="purchase.html?id=${dat.id}">
@@ -201,6 +202,29 @@
       $("#bannerdeskripsi").text(pertama.deskripsi);
     }
     main();
+    $("#search-navbar").on("input", e => {
+      let target = $(e.currentTarget),
+      value = target.val();
+      if(value.length > 0) $("#banner").css("display", "none");
+      else $("#banner").css("display", "");
+
+      $("#gamelainnya, #gamepopuler").html("");
+      DATA.forEach(dat => {
+        if(dat.nama.toLowerCase().includes(value.toLowerCase()))
+        $("#gamelainnya, #gamepopuler").append(`
+        <a href="purchase.html?id=${dat.id}">
+          <div class="p-3 my-4 mx-5 rounded-xl bg-yellow-300 shadow-lg hover:drop-shadow-2xl hover:transform hover:scale-105 transition transform delay-50">
+          <div class="max-w-sm overflow-hidden">
+            <img class="w-full h-[200px] rounded-xl" src="${url_img + dat.id}">
+            <div class="px-6 py-4">
+              <div class="font-bold md:text-lg lg:text-xl text-center">${dat.nama}</div>
+            </div>
+          </div>
+        </div>  
+        </a>
+      `)
+      });
+    });
   </script>
 </body>
 </html>
