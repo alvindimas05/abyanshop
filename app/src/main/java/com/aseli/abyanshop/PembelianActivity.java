@@ -37,7 +37,7 @@ public class PembelianActivity extends AppCompatActivity {
         getSupportActionBar().hide();
 
         Bundle extras = getIntent().getExtras();
-        List<String> koloms = Arrays.asList(extras.getString("kolom").split(","));
+        String[] koloms = extras.getString("kolom").split(",");
 
         for(String kolom : koloms){
             LinearLayout layout = (LinearLayout) LinearLayout.inflate(this, R.layout.pembelian_input, null);

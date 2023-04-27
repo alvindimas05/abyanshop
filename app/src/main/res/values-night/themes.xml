@@ -8,5 +8,6 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/orange</item>
         <!-- Customize your theme here. -->
+        <item name="actionMenuTextColor">#000</item>
     </style>
 </resources>

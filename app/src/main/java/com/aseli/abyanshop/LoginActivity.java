@@ -1,10 +1,13 @@
 package com.aseli.abyanshop;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -27,6 +30,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
@@ -41,8 +45,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 }
 class LoginTask extends AsyncTask<Void, Void, JSONObject> {
-    ProgressDialog pd;
-    Activity activity;
+    private ProgressDialog pd;
+    private Activity activity;
     public LoginTask(Activity activity){
         this.activity = activity;
     }
@@ -82,11 +86,20 @@ class LoginTask extends AsyncTask<Void, Void, JSONObject> {
             new AlertDialog.Builder(activity)
                     .setTitle("Login")
                     .setMessage((success ? "Berhasil" : "Gagal") + " login!")
-                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.cancel();
-                            if(success) activity.finish();
+                    .setPositiveButton("OK", (dialog, which) -> {
+                        dialog.cancel();
+                        if(success){
+                            ActivityManager activityManager = (ActivityManager) activity.getSystemService(Context.ACTIVITY_SERVICE);
+                            List<ActivityManager.AppTask> runningTasks = activityManager.getAppTasks();
+
+                            for(ActivityManager.AppTask task : runningTasks) {
+                                if (task.getClass().equals(MainActivity.class)) {
+                                    task.finishAndRemoveTask();
+                                    break;
+                                }
+                            }
+                            activity.startActivity(new Intent(activity, MainActivity.class));
+                            activity.finish();
                         }
                     })
                     .show();

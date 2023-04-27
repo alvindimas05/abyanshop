@@ -8,7 +8,16 @@
         app:actionViewClass="android.widget.SearchView"/>
     <item
         android:id="@+id/main_menu_akun"
-        android:icon="@drawable/akun"
+        android:icon="@drawable/akun_putih"
         android:title="@null"
-        app:showAsAction="always"/>
+        app:showAsAction="always"
+        android:visible="false"/>
+    <item
+        android:id="@+id/main_menu_login"
+        android:title="Login"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/main_menu_register"
+        android:title="Register"
+        app:showAsAction="never"/>
 </menu>

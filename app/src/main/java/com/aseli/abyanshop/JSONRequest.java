@@ -19,6 +19,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,7 +28,7 @@ public class JSONRequest {
     // Ganti url jika link api-mu berbeda
     private String url = "http://ancritbat.my.id:8880/api/",
             path;
-    private HashMap postData;
+    private HashMap<String, String> postData;
     public static final int
             HTTP_GET = 0,
             HTTP_POST = 1;
@@ -82,7 +83,7 @@ public class JSONRequest {
                     conn.setDoOutput(true);
 
                     OutputStream os = conn.getOutputStream();
-                    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+                    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, StandardCharsets.UTF_8));
                     writer.write(getPostDataString(postData));
                     writer.flush();
                     writer.close();

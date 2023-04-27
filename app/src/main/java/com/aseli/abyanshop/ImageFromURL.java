@@ -49,11 +49,6 @@ class ImageFromURLAsync extends AsyncTask<Void, Void, Bitmap> {
     }
     @Override
     public void onPostExecute(Bitmap bitmap){
-        activity.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                image.setImageBitmap(bitmap);
-            }
-        });
+        activity.runOnUiThread(() -> image.setImageBitmap(bitmap));
     }
 }
