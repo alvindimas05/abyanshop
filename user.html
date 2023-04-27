@@ -1,17 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Purchase</title>
-    <link rel = "icon" href ="/asset/icon.png" type = "image/x-icon">
-    <script src="tailwind3.3.1"></script>
+    <title>User Profile</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <script src="global.js"></script>
+
 </head>
 <body>
   <nav class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded ">
@@ -64,57 +62,39 @@
     </div>
   </nav>
 
-      <div class="container mx-auto my-8 bg-orange-400 md:grid md:grid-cols-2 rounded-xl">
-        <img id="bannergambar" class="w-full h-full rounded-b-lg mx-auto md:rounded-lg lg:p-4">
-        <div class="py-4 px-4 font-bold text-xl lg:text-3xl mx-auto">
-          <span  id="bannerjudul"></span>
-            <div class="text-lg font-semibold mt-3">
-              <span id="bannerdeskripsi"></span>
-                <div class="container mt-5">
-                  <form class="grid grid-cols-[6rem_auto] gap-y-3" id="formbeli">                     
-                         <!--
-                         
-                       <label for="server" class="self-center">Server</label>
-                       <input type="text" class="rounded-xl py-2 px-4" name="server">
-                       
-                       <label for="qty" class="self-center">Jumlah</label>
-                        <select class="py-2 px-4 rounded-xl" name="qty" id="qty">
-                          <option></option>
-                          <option value="1">100 Diamonds</option>
-                          <option value="2">200 Diamonds</option>
-                          <option value="3">300 Diamonds</option>
-                          <option value="4">400 Diamonds</option>
-                          <option value="5">500 Diamonds</option>
-                          <option value="6">600 Diamonds</option>
-                          <option value="7">800 Diamonds</option>
-                          <option value="8">1000 Diamonds</option>     
-                        </select>         
-                        
-                       <label for="price" class="self-center">Harga</label>
-                       <input class="py-2 px-4 rounded-xl" type="text" name="price" id="price" readonly>
-                       
-                      <div></div> -->
-                    <!-- <div><button class="py-3 px-6 text-base text-white bg-orange-600 rounded-full hover:bg-orange-700 float-right" onclick="beli()">Pesan Sekarang</button></div> -->
-                  </form>   
-                </div>
+      <div class="container p-4 md:p-8 mx-auto mt-8 rounded-xl bg-gradient-to-l from-[#FF4E00] to-[#FeD020] text-white">
+        <h1 class="text-3xl py-6 md:text-4xl font-bold text-center mb-8">Profil Pengguna</h1>
+        <div class="md:grid md:grid-cols-[23.5rem_auto]">
+
+          <div class="flex justify-center items-center">
+            <img src="http://via.placeholder.com/360x360" class="rounded-lg w-[250px] h-[250px] md:w-[350px] md:h-[350px]">
+          </div>
+
+            <div class="py-6 px-4 font-bold mx-auto grid grid-cols-[5rem_2rem_auto] md:text-2xl md:ml-20 md:grid md:grid-cols-[13rem_2rem_auto]">
+                  <span>Username</span>
+                  <span class="ml-2">:</span>
+                  <span class="mb-4" id="usn"></span>
+                  <span>Saldo</span>
+                  <span class="ml-2">:</span>
+                  <span class="mb-4" id="saldo"></span>
+                  <span>Histori Pembelian </span>
+                  <span class="mt-2 ml-2">:</span>
+                      <ul class="scrollbar-hide list-decimal list-inside mb-4 max-h-28 md:max-h-36 overflow-auto" id="histori">
+                          <!-- <li class="mb-3">
+                            Mobile Gemink
+                            <ul>
+                              <li class="text-sm font-medium md:text-xl">&nbsp&nbsp&nbsp&nbsp 100 Bengsin</li>
+                            </ul>
+                          </li> -->
+                      </ul>
+                  <label for="topup">Tambah Saldo</label>
+                  <span class="self-center">Rp</span>
+                  <input class="ml-2 bg-transparent border-b border-white outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" type="number" name="topup" inputmode="numeric" id="topup">
             </div>
         </div>
+        
       </div>
 
-      <div class="container mx-auto my-8 ">
-        <div class="ml-10 text-2xl font-bold">Game Lainnya</div>
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-5" id="gamelainnya">
-          <!-- <div class="p-3 my-4 mx-5 rounded-xl bg-yellow-300 shadow-lg hover:drop-shadow-2xl hover:transform hover:scale-110">
-            <div class="max-w-sm overflow-hidden">
-              <img class="w-full rounded-xl" src="asset/placeholder.png" alt="placeholder">
-              <div class="px-6 py-4">
-                <div class="font-bold text-xl" align="center">Clash Royale</div>
-              </div>
-            </div>
-          </div>    -->
-        </div>
-      </div>
-      
   <footer class="bg-white">
     <div class="mx-auto w-full container p-4 sm:p-6">
       <hr class="my-6 border-gray-200 sm:mx-auto lg:my-8" />
@@ -187,134 +167,40 @@
       </div>
     </div>
   </footer>
+      <style>
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+      </style>
+      <script>
+        async function main(){
+          let res = await $.get(url + "user?user_id=" + $.cookie("user_id")).promise();
+          $("#saldo").text("Rp " + res.data.saldo);
+          $("#usn").text(res.data.username);
+
+          res = await $.get(url + 'user/riwayat?user_id=' + $.cookie("user_id")).promise();
+          console.log(res);
+          res.data.forEach(dat => 
+          $("#histori").append(`
+            <li class="mb-3">
+              ${dat.tipe}
+              <ul>
+                <li class="text-sm font-medium md:text-xl">&nbsp&nbsp&nbsp&nbsp${dat.nama}</li>
+              </ul>
+            </li>
+          `));
+        }
+        async function topup(e){
+          if(e.keyCode !== 13) return;
+          var res = await $.post(url + "user/top_up", {
+            user_id:$.cookie("user_id"),
+            jumlah:parseInt($(e.currentTarget).val())
+          });
+          if(res.status) window.location.reload();
+          else alert(res.message);
+        }
+        main();
+        $("#topup").keypress(topup);
+      </script>
 </body>
-<style>
-    ::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-    }
-    ::-webkit-scrollbar-button {
-    width: 0px;
-    height: 0px;
-    }
-    ::-webkit-scrollbar-thumb {
-    background: #e1e1e1;
-    border: 0px inset #ff0000;
-    border-radius: 50px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-    background: #ffffff;
-    }
-    ::-webkit-scrollbar-thumb:active {
-    background: #000000;
-    }
-    ::-webkit-scrollbar-divack {
-    border: 0px groove #ffffff;
-    border-radius: 50px;
-    }
-    ::-webkit-scrollbar-divack:hover {
-    background: #666666;
-    }
-    ::-webkit-scrollbar-divack:active {
-    background: #333333;
-    }
-    ::-webkit-scrollbar-corner {
-    background: divansparent;
-    }
-    .content:hover{
-        transform: scale(1.1);
-    }
-    #full{
-        display: none;
-    }
-</style>
-<script>
-  var param = new URLSearchParams(location.search.substring(1));
-  var id = param.get('id');
-
-  async function main(){
-    var tipe = await fetch(url + "tipe?id_tipe=" + id); //mengambil data dari api
-      tipe = await tipe.json(); //mengubah data menjadi json
-      console.log(tipe.data);
-
-    tipe = tipe.data; 
-      $("#bannergambar").attr("src", url_img + tipe.id);
-      $("#bannerjudul").text(tipe.nama);
-      $("#bannerdeskripsi").text(tipe.deskripsi);
-
-    var kolom = tipe.kolom.split(",");
-    var form = $("#formbeli");
-    kolom.forEach(kol => {
-      kol = kol.replace("_", " ");
-      form.append(`
-      <label for="uid" class="self-center">${kol.toUpperCase()}</label>
-      <input type="text" name="${kol}" class="rounded-xl py-2 px-4">
-      `);
-    });
-
-    var produk = await fetch(url + "produk?id_tipe=" + id);
-    produk = await produk.json();
-    produk = produk.data;
-    form.append(`
-    <label for="qty" class="self-center">Jumlah</label>
-      <select class="py-2 px-4 rounded-xl" name="qty" id="qty">
-        <option value="">Pilih Jumlah</option>   
-      </select>
-    `);
-
-    produk.forEach(prod => {
-      $("#qty").append(`
-        <option value="${prod.id}" harga="${prod.harga}">${prod.nama}</option>
-      `);
-    });
-    form.append(`
-    <label for="uid" class="self-center">Harga</label>
-      <input type="text" id="harga" class="rounded-xl py-2 px-4" readonly>
-    `);
-
-    $("#qty").change(e => {
-      var target = $(e.target).find("option:selected");
-      var harga = target.attr("harga");
-      $("#harga").val(harga ? "Rp " + harga : "");
-    });
-
-    form.append(`
-    <div></div>
-    <div><button class="py-3 px-6 text-base text-white bg-orange-600 rounded-full hover:bg-orange-700 float-right" type="submit">Pesan Sekarang</button></div>
-    `);
-
-  }
-  async function produk(){
-    var data = await fetch(url + "tipe");
-    data = await data.json();
-
-    data.data.forEach(dat => {
-      $("#gamelainnya").append(`
-      <a href="purchase.html?id=${dat.id}">
-      <div class="p-3 my-4 mx-5 rounded-xl bg-yellow-300 shadow-lg hover:drop-shadow-2xl hover:transform hover:scale-105">
-            <div class="max-w-sm overflow-hidden">
-              <img class="w-full rounded-xl" src="${url_img + dat.id}">
-              <div class="px-6 py-4">
-                <div class="font-bold text-xl" align="center">${dat.nama}</div>
-              </div>
-            </div>
-          </div> 
-          </a>
-      `);
-    });
-  }
-  main();
-  produk();
-  $("#formbeli").submit(async e => {
-    e.preventDefault();
-    var res = await $.post(url + "user/beli", {
-      user_id:$.cookie("user_id"),
-      id_produk:$("#qty option:selected").val()
-    }).promise();
-    if(res.status){
-      alert("Pembelian berhasil!");
-      setTimeout(() => location.href = "/user.html", 3000);
-    } else alert(res.message);
-  });
-</script>
-</html> 
+</html>

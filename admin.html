@@ -1,104 +1,172 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Admin</title>
+    <link rel = "icon" href ="/asset/icon.png" type = "image/x-icon">
+    <script src="tailwind3.3.1"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <script src="global.js"></script>
 </head>
 <body>
-    <nav class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded ">
-        <div class="container flex flex-wrap items-center justify-between mx-auto">
-        <a href="#" class="flex items-center">
-            <img src="asset/icon.png" class="h-14 mr-1 sm:h-14" alt="ws Logo" />
-            <span class="self-center text-xl font-semibold whitespace-nowrap">AbyanStore</span>
-        </a>
-        <div class="flex md:order-2">
-          <button type="button" data-collapse-toggle="navbar-search" aria-controls="navbar-search" aria-expanded="false" class="md:hidden text-gray-500" >
-            <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
-            <span class="sr-only">Search</span>
-          </button>
-          <div class="relative hidden md:block mr-3">
-            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-              <svg class="w-5 h-5 text-gray-500" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
-              <span class="sr-only">Search icon</span>
-            </div>
-            <input type="text" id="search-navbar" class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500" placeholder="Search...">
-          </div>
-          <button data-collapse-toggle="navbar-search" type="button" class="inline-flex items-center mr-3 p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200" aria-controls="navbar-search" aria-expanded="false">
-            <span class="sr-only">Open menu</span>
-            <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
-          </button>
-          <button type="button" class="button-login text-white bg-orange-600 hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-3">Login</button>
-          <button type="button" class="button-login text-white bg-orange-600 hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-3">Sign Up</button>
-          <img src="asset/profil.png" hidden class="w-10 h-10" alt="profil">
+  <nav class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded ">
+    <div class="container flex flex-wrap items-center justify-between mx-auto">
+    <a href="#" class="flex items-center">
+        <img src="asset/icon.png" class="h-14 mr-1 sm:h-14" alt="ws Logo" />
+        <span class="self-center text-xl font-semibold whitespace-nowrap text-[#EA7600]">ABYAN</span>
+        <span class="text-xl font-semibold whitespace-nowrap text-[#2F4F4F]">SHOP</span>
+    </a>
+    <div class="flex md:order-2">
+      <button type="button" data-collapse-toggle="navbar-search" aria-controls="navbar-search" aria-expanded="false" class="md:hidden text-gray-500" >
+        <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
+        <span class="sr-only">Search</span>
+      </button>
+      <div class="relative hidden md:block mr-3">
+        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+          <svg class="w-5 h-5 text-gray-500" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
+          <span class="sr-only">Search icon</span>
         </div>
-          <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-search">
-            <div class="relative mt-3 md:hidden">
-              <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                <svg class="w-5 h-5 text-gray-500" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
-              </div>
-              <input type="text" id="search-navbar" class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500" placeholder="Search...">
-            </div>
-            <ul class="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white">
-              <li>
-                <a href="#" class="block py-2 pl-3 pr-4 text-white bg-orange-700 rounded md:bg-transparent md:text-orange-700 md:p-0" aria-current="page">Home</a>
-              </li> 
-              <li>
-                <a href="#" class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-orange-700 md:p-0 ">About</a>
-              </li>
-              <li>
-                <a href="#" class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-orange-700 md:p-0">Services</a>
-              </li>
-            </ul>
+        <input type="text" id="search-navbar" class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500" placeholder="Search...">
+      </div>
+      <button data-collapse-toggle="navbar-search" type="button" class="inline-flex items-center mr-3 p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200" aria-controls="navbar-search" aria-expanded="false">
+        <span class="sr-only">Open menu</span>
+        <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
+      </button>
+      <button onclick="location.href='/login.html'" type="button" class="button-login text-white bg-orange-600 hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-3">Login</button>
+      <button onclick="location.href='/register.html'"  type="button" class="button-login text-white bg-orange-600 hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-3">Sign Up</button>
+      <img src="asset/profil.png" hidden class="w-10 h-10 mr-5 cursor-pointer" alt="profil">
+      <button type="button" hidden class="button-logout text-white bg-orange-400 hover:bg-orange-500 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-3">Log out</button>
+    </div>
+      <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-search">
+        <div class="relative mt-3 md:hidden">
+          <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+            <svg class="w-5 h-5 text-gray-500" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
           </div>
+          <input type="text" id="search-navbar" class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500" placeholder="Search...">
         </div>
-      </nav>
+        <ul class="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white">
+          <li>
+            <a href="/index.html" class="block py-2 pl-3 pr-4 text-white bg-orange-700 rounded md:bg-transparent md:text-orange-700 md:p-0 md:text-lg" aria-current="page">Home</a>
+          </li> 
+          <li>
+            <a href="/aboutus.html" class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-orange-700 md:p-0 md:text-lg">About Us</a>
+          </li>
+          <li>
+            <a href="#" class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-orange-700 md:p-0 md:text-lg">Contacts</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
-      <div class="container p-4 md:p-8 mx-auto mt-8 bg-orange-400 rounded-xl">
-        <h1 class="text-3xl md:text-4xl font-bold text-center mb-8">Profil Admin</h1>
-        <div class="flex flex-col items-center justify-center "> 
-          <img src="http://via.placeholder.com/360x360" class="mb-4 rounded-lg w-[250px] h-[250px] md:w-[350px] md:h-[350px]">
-          <!-- <button class="my-4 py-2 w-[330px] border border-black text-center bg-yellow-400 hover:bg-yellow-500">Edit Foto Profil</button> -->
+      <div class="container my-8 mx-auto rounded-2xl text-white">
+
+        <table class="w-full bg-gradient-to-r from-[#FF4E00] to-[#FeD020]">
+          <thead class="font-bold border-b border-whitex text-xl">
+            <tr>
+              <td class="p-4">No.</td>
+              <td class="p-4">Nama Produk</td>
+              <td class="p-4">Jumlah</td>
+              <td class="p-4">Jenis</td>
+              <td class="p-4">Harga</td>
+            </tr>
+
+          </thead>
+          <tbody class="text-lg">
+            <tr class="">
+              <td class="p-4">1.</td>
+              <td class="p-4">Bengsin</td>
+              <td class="p-4">100</td>
+              <td class="p-4">Mobile Gemink</td>
+              <td class="p-4">Rp 25000</td>
+            </tr>
+            <tr class="">
+              <td class="p-4">1.</td>
+              <td class="p-4">Bengsin</td>
+              <td class="p-4">100</td>
+              <td class="p-4">Mobile Gemink</td>
+              <td class="p-4">Rp 25000</td>
+            </tr>
+            <tr class="">
+              <td class="p-4">1.</td>
+              <td class="p-4">Bengsin</td>
+              <td class="p-4">100</td>
+              <td class="p-4">Mobile Gemink</td>
+              <td class="p-4">Rp 25000</td>
+            </tr>
+            <tr class="">
+              <td class="p-4">1.</td>
+              <td class="p-4">Bengsin</td>
+              <td class="p-4">100</td>
+              <td class="p-4">Mobile Gemink</td>
+              <td class="p-4">Rp 25000</td>
+            </tr>
+            <tr class="">
+              <td class="p-4">1.</td>
+              <td class="p-4">Bengsin</td>
+              <td class="p-4">100</td>
+              <td class="p-4">Mobile Gemink</td>
+              <td class="p-4">Rp 25000</td>
+            </tr>
+            <tr class="">
+              <td class="p-4">1.</td>
+              <td class="p-4">Bengsin</td>
+              <td class="p-4">100</td>
+              <td class="p-4">Mobile Gemink</td>
+              <td class="p-4">Rp 25000</td>
+            </tr>
+
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <button id="input" class="grid content-center w-[200px] h-[60px] mx-auto my-4 border border-[#ff833d] rounded-full text-[#ff833d] text-center text-lg font-bold hover:text-white hover:bg-gradient-to-r hover:from-[#ff833d] hover:to-[#fdd134] hover:border-none hover:transition hover:ease-in hover:duration-300">Tambah Stok</button>
+      
+
+      <div id="form" class="hidden mt-16 bg-gradient-to-l from-[#FF4E00] to-[#FeD020] py-20">
+
+        <div class="my-3 flex flex-col container mx-auto border border-orange-500 rounded-xl w-[45rem] py-8 bg-white drop-shadow-xl">
+          
+          <span class="self-center text-4xl text-orange-600 font-bold">Input Data Produk</span>
+          <div class="grid grid-cols-[8rem_1rem_22rem] mt-16 justify-center text-xl">
+
+              <label for="nama" class="pl-4 py-2 text-orange-600 font-bold">Nama</label>
+              <span class="text-orange-600 font-bold py-2">:</span>
+              <input type="text" name="nama" id="" class="text-orange-500 font-bold border-b-[2px] border-orange-300 py-2 px-3 mb-4 outline-none focus:border-orange-500">
+      
+              <label for="jml" class="pl-4 py-2 text-orange-600 font-bold">Jumlah</label>
+              <span class="text-orange-600 font-bold py-2">:</span>
+              <input type="text" name="jml" id="" class="text-orange-500 font-bold border-b-[2px] border-orange-300 py-2 px-3 mb-4 outline-none focus:border-orange-500">
+      
+              <label for="jenis" class="pl-4 py-2 text-orange-600 font-bold">Jenis</label>
+              <span class="text-orange-600 font-bold py-2">:</span>
+              <input type="text" name="jenis" id="" class="text-orange-500 font-bold border-b-[2px] border-orange-300 py-2 px-3 mb-4 outline-none focus:border-orange-500">
+      
+              <label for="harga" class="pl-4 py-2 text-orange-600 font-bold">Harga</label>
+              <span class="text-orange-600 font-bold py-2">:</span>
+              <input type="text" name="harga" id="" class="text-orange-500 font-bold border-b-[2px] border-orange-300 py-2 px-3 mb-4 outline-none focus:border-orange-500">
+
+              <div></div>
+              <div></div>
+              <button class="ml-auto w-[130px] h-[50px] mt-4 border border-[#ff833d] rounded-full text-[#ff833d] text-center text-base font-bold hover:text-white hover:bg-gradient-to-r hover:from-[#ff833d] hover:to-[#fdd134] hover:border-none hover:transition hover:ease-in hover:duration-300">Tambah</button>
+          </div>
+
         </div>
-           
-            <div class="py-6 px-4 font-bold mx-auto grid grid-cols-[5rem_1rem_auto] md:text-2xl md:ml-20 md:grid md:grid-cols-[13rem_1rem_auto]">
-                <span>Username</span>
-                <span>:</span>
-                <span class="mb-4">Alvin Dimas P</span>
-                <span>Histori Penjualan </span>
-                    <span class="mb-4">:</span>
-                    <ul class="list-decimal ml-5 md:ml-7 mb-4">
-                        <li>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</li>
-                        <li>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</li>
-                        <li>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</li>
-                    </ul>
-                    <span>Stok </span>
-                    <span>:</span>
-                    <ul class="list-decimal ml-5 md:ml-7 ">
-                        <li>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</li>
-                        <li>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</li>
-                        <li>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</li>
-                    </ul>
-                <div></div>
-                <div></div>
-                <div>
-                    <button class="px-4 py-2 md:px-6 md:py-3 mt-4 mr-3 rounded-lg text-center text-sm md:text-xl float-right bg-yellow-300 hover:bg-yellow-400">Tambah Stok</button>
-                </div>
-            </div>
       </div>
 
-    <footer class="bg-white">
+      <footer class="bg-white">
         <div class="mx-auto w-full container p-4 sm:p-6">
           <hr class="my-6 border-gray-200 sm:mx-auto lg:my-8" />
             <div class="md:flex md:justify-between">
               <div class="mb-6 md:mb-0">
                   <a href="" class="flex items-center">
-                      <img src="asset/icon.png" class="h-8 mr-3"/>
-                      <span class="self-center text-2xl font-semibold whitespace-nowrap">AbyanStore</span>
+                      <img src="asset/icon.png" class="h-8 mr-3" />
+                      <span class="self-center text-2xl font-semibold whitespace-nowrap text-[#EA7600]">ABYAN</span>
+                      <span class="self-center text-2xl font-semibold whitespace-nowrap text-[#2F4F4F]">SHOP</span>
                   </a>
               </div>
               <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
@@ -106,7 +174,7 @@
                       <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase">Resources</h2>
                       <ul class="text-gray-600">
                           <li class="mb-4">
-                              <a href="#" class="hover:underline">AbyanStore</a>
+                              <a href="#" class="hover:underline">ABYANSHOP</a>
                           </li>
                           <li>
                               <a href="https://tailwindcss.com/" class="hover:underline">Tailwind CSS</a>
@@ -139,7 +207,7 @@
           </div>
           <hr class="my-6 border-gray-200 sm:mx-auto lg:my-8" />
           <div class="sm:flex sm:items-center sm:justify-between">
-              <span class="text-sm text-gray-500 sm:text-center ">© 2023 <a href="#" class="hover:underline">AbyanStore™</a>. All Rights Reserved.
+              <span class="text-sm text-gray-500 sm:text-center ">© 2023 <a href="#" class="hover:underline">ABYANSHOP™</a>. All Rights Reserved.
               </span>
               <div class="flex mt-4 space-x-6 sm:justify-center sm:mt-0">
                   <a href="#" class="text-gray-500 hover:text-gray-900">
@@ -162,5 +230,19 @@
           </div>
         </div>
       </footer>
+
+      <script>
+      let open = false;
+      $("#input").click(function() {
+          $("#form").slideToggle("slow");
+          if(!open){
+            $('html, body').animate({
+              scrollTop: $("#form").offset().top
+            }, 1000);
+            open = true;
+          } else open = false;
+          
+        });
+      </script>
 </body>
 </html>

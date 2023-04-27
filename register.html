@@ -4,9 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Regist</title>
+    <link rel = "icon" href ="/asset/icon.png" type = "image/x-icon">
+    <script src="tailwind3.3.1"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <script src="global.js"></script>
 </head>
 <body>
@@ -21,10 +25,10 @@
                     <label for="pass">Password</label>
                     <input type="password" name="pass" class="mx-2 mb-16 border-b border-orange-300 outline-orange-200 rounded">
                     <label for="pass">Konfirmasi Password</label>
-                    <input type="password" name="pass" class="mx-2 mb-16 border-b border-orange-300 outline-orange-200 rounded">
+                    <input type="password" name="vpass" class="mx-2 mb-16 border-b border-orange-300 outline-orange-200 rounded">
                 </div>
                 <div class="flex justify-center mb-3">
-                    <button class="text-center px-7 py-2 border border-orange-300 mx-auto">Create Account</button>
+                    <button class="text-center px-7 py-2 border border-orange-300 mx-auto" id="create">Create Account</button>
                 </div>
                 <div class="flex justify-center">
                     <span>Have an account?&nbsp;</span>
@@ -33,5 +37,24 @@
             </div>
         </div>
     </div>
+    <script>
+        async function click(e){
+            $(e.currentTarget).attr("disabled", true);
+            
+            let res = await $.post(url + "user", {
+                username:$("input[name='usn']").val(),
+                password:$("input[name='pass']").val(),
+                vpassword:$("input[name='vpass']").val(),
+            }).promise();
+            if (res.status){
+                $.cookie("user_id", res.data);
+                window.location.href = "/";
+            } else {
+                alert(res.message);
+                $(e.currentTarget).attr("disabled", false);
+            }
+        }
+        $("#create").click(click);
+    </script>
 </body>
 </html>
