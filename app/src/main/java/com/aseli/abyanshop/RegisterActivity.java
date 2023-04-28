@@ -28,10 +28,10 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_register);
         getSupportActionBar().hide();
     }
-    public void onLogin(View v){
+    public void onRegister(View v){
         EditText p1 = findViewById(R.id.register_password),
                 p2 = findViewById(R.id.register_vpassword);
         if(!p1.getText().toString().equals(p2.getText().toString())){
@@ -85,11 +85,11 @@ class RegisterTask extends AsyncTask<Void, Void, JSONObject> {
             }
             pd.dismiss();
             new AlertDialog.Builder(activity)
-                .setTitle("Register")
-                .setMessage(success ? "Berhasil register!" : obj.getString("message"))
-                .setPositiveButton("OK", (dialog, which) -> {
-                    dialog.cancel();
-                    if(success){
+                    .setTitle("Register")
+                    .setMessage(success ? "Berhasil register!" : obj.getString("message"))
+                    .setPositiveButton("OK", (dialog, which) -> {
+                        dialog.cancel();
+                        if(!success) return;
                         ActivityManager activityManager = (ActivityManager) activity.getSystemService(Context.ACTIVITY_SERVICE);
                         List<ActivityManager.AppTask> runningTasks = activityManager.getAppTasks();
                         for(ActivityManager.AppTask task : runningTasks) {
@@ -101,8 +101,7 @@ class RegisterTask extends AsyncTask<Void, Void, JSONObject> {
                         }
                         activity.startActivity(new Intent(activity, MainActivity.class));
                         activity.finish();
-                    }
-                }).show();
+                    }).show();
         } catch (Exception e) {
             Log.w("Login Error", e);
         }

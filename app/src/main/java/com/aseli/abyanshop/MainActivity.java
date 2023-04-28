@@ -4,10 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -43,9 +46,21 @@ public class MainActivity extends AppCompatActivity {
             menu.findItem(R.id.main_menu_register).setVisible(false);
             menu.findItem(R.id.main_menu_login).setVisible(false);
             menu.findItem(R.id.main_menu_akun).setVisible(true);
+            menu.findItem(R.id.main_menu_logout).setVisible(true);
         }
         return true;
     }
+
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setTitle("Peringatan")
+                .setMessage("Apakah kamu yakin ingin keluar?")
+                .setCancelable(true)
+                .setNegativeButton("Batalkan", (dialogInterface, i) -> dialogInterface.dismiss())
+                .setPositiveButton("Konfirmasi", (dialogInterface, i) -> finishAndRemoveTask()).show();
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -53,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
-        Intent intent = null;
+        Intent intent;
         switch(item.getItemId()){
             case R.id.main_menu_login:
                 intent = new Intent(this, LoginActivity.class);
@@ -62,7 +77,24 @@ public class MainActivity extends AppCompatActivity {
                 intent = new Intent(this, RegisterActivity.class);
                 break;
             case R.id.main_menu_akun:
-                return true;
+                intent = new Intent(this, ProfilActivity.class);
+                break;
+            case R.id.main_menu_logout:
+                new AlertDialog.Builder(this)
+                        .setTitle("Peringatan")
+                        .setMessage("Apakah kamu yakin akan log out?")
+                        .setCancelable(true)
+                        .setPositiveButton("Konfirmasi", (dialogInterface, i) -> {
+                            SharedPreferences settings = getSharedPreferences("user_data", Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = settings.edit();
+                            editor.remove("user_id");
+                            editor.apply();
+
+                            Intent intent1 = new Intent(this, MainActivity.class);
+                            startActivity(intent1);
+                            finish();
+                        }).setNegativeButton("Batalkan", (dialogInterface, i) -> dialogInterface.dismiss()).show();
+            default: return true;
         }
         startActivity(intent);
         return true;
@@ -120,7 +152,7 @@ class ProdukTask extends AsyncTask<Void, Void, List<LinearLayout>> {
         } catch (Exception e){
             Log.w("Produk Task", e);
         }
-        return new ArrayList<>();
+        return null;
     }
     @Override
     protected void onPostExecute(List<LinearLayout> result){

@@ -1,5 +1,6 @@
 package com.aseli.abyanshop;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -8,6 +9,7 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -34,8 +36,17 @@ public class PembelianActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pembelian);
-        getSupportActionBar().hide();
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == android.R.id.home)
+            onBackPressed();
+        return true;
+    }
+    @Override
+    protected void onStart() {
+        super.onStart();
         Bundle extras = getIntent().getExtras();
         String[] koloms = extras.getString("kolom").split(",");
 
@@ -45,17 +56,22 @@ public class PembelianActivity extends AppCompatActivity {
             ((TextView) layout.getChildAt(0)).setText(kolom);
             ((LinearLayout) findViewById(R.id.pembelian_inputs)).addView(layout);
         }
-        new ImageFromURL(findViewById(R.id.pembelian_image), extras.getInt("id")).setImage(this);
+        try {
+            new ImageFromURL(findViewById(R.id.pembelian_image), extras.getInt("id")).setImage(this);
+        } catch (Exception e) {
+            Log.w("Pembelian Image", e);
+        }
         JSONArray data = null;
         try {
             data = new PembelianTask(this, extras.getInt("id")).execute().get();
         } catch (Exception e) {
-            Log.w("Penbelian Error", e);
+            Log.w("Pembelian Error", e);
         }
         // Spinner onSelected
         Spinner spinner = findViewById(R.id.pembelian_produk);
         finalData = data;
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 try {

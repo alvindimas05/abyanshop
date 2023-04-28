@@ -11,17 +11,11 @@ import java.io.InputStream;
 import java.net.URL;
 
 public class ImageFromURL {
-    private String url = "http://ancritbat.my.id:8880/api/";
     private ImageView image;
     private int id;
-
     public ImageFromURL(ImageView image, int id){
         this.image = image;
         this.id = id;
-    }
-    public void setImageAsync() throws Exception {
-        InputStream is = (InputStream) new URL(url + "../images/" + id).getContent();
-        image.setImageBitmap(BitmapFactory.decodeStream(is));
     }
     public void setImage(Activity activity){
         new ImageFromURLAsync(activity, image, id).execute();

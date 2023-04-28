@@ -10,6 +10,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -88,19 +89,18 @@ class LoginTask extends AsyncTask<Void, Void, JSONObject> {
                     .setMessage((success ? "Berhasil" : "Gagal") + " login!")
                     .setPositiveButton("OK", (dialog, which) -> {
                         dialog.cancel();
-                        if(success){
-                            ActivityManager activityManager = (ActivityManager) activity.getSystemService(Context.ACTIVITY_SERVICE);
-                            List<ActivityManager.AppTask> runningTasks = activityManager.getAppTasks();
-
-                            for(ActivityManager.AppTask task : runningTasks) {
-                                if (task.getClass().equals(MainActivity.class)) {
-                                    task.finishAndRemoveTask();
-                                    break;
-                                }
+                        if(!success) return;
+                        ActivityManager activityManager = (ActivityManager) activity.getSystemService(Context.ACTIVITY_SERVICE);
+                        List<ActivityManager.AppTask> runningTasks = activityManager.getAppTasks();
+                        for(ActivityManager.AppTask task : runningTasks) {
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&
+                                    task.getTaskInfo().baseActivity.getClassName().equals(MainActivity.class.getSimpleName())) {
+                                task.finishAndRemoveTask();
+                                break;
                             }
-                            activity.startActivity(new Intent(activity, MainActivity.class));
-                            activity.finish();
                         }
+                        activity.startActivity(new Intent(activity, MainActivity.class));
+                        activity.finish();
                     })
                     .show();
         } catch (Exception e) {
