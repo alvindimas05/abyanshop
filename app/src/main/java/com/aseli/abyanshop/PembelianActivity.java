@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -148,10 +149,17 @@ class BeliTask extends AsyncTask<Void, Void, JSONObject>{
     protected void onPostExecute(JSONObject obj){
         pd.dismiss();
         try {
+            boolean success = obj.getBoolean("status");
             new AlertDialog.Builder(activity)
                     .setTitle("Pembelian")
-                    .setMessage(obj.getBoolean("status") ? "Pembelian berhasil!" : obj.getString("message"))
-                    .setPositiveButton("OK", (dialog, which) -> dialog.cancel()).show();
+                    .setMessage(success ? "Pembelian berhasil!" : obj.getString("message"))
+                    .setPositiveButton("OK", (dialog, which) -> {
+                        dialog.cancel();
+                        if(success){
+                            activity.startActivity(new Intent(activity, ProfilActivity.class));
+                            activity.finish();
+                        }
+                    }).show();
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }

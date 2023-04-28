@@ -2,13 +2,20 @@ package com.aseli.abyanshop;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -21,6 +28,7 @@ import org.json.JSONObject;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class ProfilActivity extends AppCompatActivity {
@@ -32,6 +40,14 @@ public class ProfilActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         new ProfilTask(this).execute();
     }
+    public void onTopUp(View v){
+        EditText editText = findViewById(R.id.profil_isi_saldo);
+        editText.setFocusableInTouchMode(false);
+        editText.setFocusable(false);
+        editText.setFocusableInTouchMode(true);
+        editText.setFocusable(true);
+        new TopUpTask(this, editText.getText().toString()).execute();
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == android.R.id.home)
@@ -39,7 +55,58 @@ public class ProfilActivity extends AppCompatActivity {
         return true;
     }
 }
+class TopUpTask extends AsyncTask<Void, Void, JSONObject> {
+    private Activity activity;
+    private String jumlah;
+    private ProgressDialog pd;
+    public TopUpTask(Activity activity, String jumlah){
+        this.activity = activity;
+        this.jumlah = jumlah;
+        this.pd = new ProgressDialog(activity);
+    }
 
+    @Override
+    protected void onPreExecute() {
+        pd.setTitle("Loading...");
+        pd.show();
+    }
+
+    @Override
+    protected JSONObject doInBackground(Void... voids) {
+        try {
+            SharedPreferences settings = activity.getSharedPreferences("user_data", Context.MODE_PRIVATE);
+            HashMap<String, String> data = new HashMap<>();
+            data.put("user_id", settings.getString("user_id", null));
+            data.put("jumlah", jumlah);
+
+            return new JSONRequest()
+                    .setMethod(JSONRequest.HTTP_POST)
+                    .setPath("user/top_up")
+                    .setData(data).execute();
+        } catch (Exception e){
+            Log.w("TopUp Error", e);
+        }
+        return null;
+    }
+
+    @Override
+    protected void onPostExecute(JSONObject obj) {
+        pd.dismiss();
+        try {
+            boolean success = obj.getBoolean("status");
+            new AlertDialog.Builder(activity)
+                    .setTitle("Top Up")
+                    .setMessage(success ? "Top Up berhasil!" : "Terjadi kesalahan!")
+                    .setPositiveButton("OK", (dialog, which) -> {
+                        dialog.dismiss();
+                        activity.startActivity(new Intent(activity, ProfilActivity.class));
+                        activity.finish();
+                    }).show();
+        } catch(Exception e){
+            Log.w("TopUp Error", e);
+        }
+    }
+}
 class ProfilTask extends AsyncTask<Void, Void, List<JSONObject>> {
     private Activity activity;
     private ProgressDialog pd;
