@@ -1,6 +1,7 @@
 package com.aseli.abyanshop;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.cardview.widget.CardView;
 
 import android.app.Activity;
@@ -64,6 +65,30 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        SearchView search = (SearchView) menu.findItem(R.id.main_menu_search).getActionView();
+        search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                ScrollView scroll = findViewById(R.id.main_view);
+                for(int i = 0; i < scroll.getChildCount(); i++){
+                    LinearLayout layout = (LinearLayout) scroll.getChildAt(i);
+                    for(int j = 0; j < layout.getChildCount(); j++){
+                        CardView card = (CardView) layout.getChildAt(j);
+                        TextView text = (TextView) card.getChildAt(1);
+
+                        String oldText = text.getText().toString();
+                        card.setVisibility(oldText.contains(newText) && !oldText.equals("")
+                                ? View.VISIBLE : View.GONE);
+                    }
+                }
+                return false;
+            }
+        });
         return true;
     }
     @Override

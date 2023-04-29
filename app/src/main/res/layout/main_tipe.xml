@@ -56,7 +56,7 @@
             android:background="@color/orange"
             android:fontFamily="@font/poppins_medium"
             android:padding="3dp"
-            android:text="TextView"
+            android:text=""
             android:textSize="15dp" />
     </androidx.cardview.widget.CardView>
 </LinearLayout>
