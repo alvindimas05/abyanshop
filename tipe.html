@@ -68,63 +68,18 @@
           <thead class="font-bold border-b border-whitex text-xl">
             <tr>
               <td class="p-4">No.</td>
+              <td class="p-4">Preview</td>
               <td class="p-4">Nama Produk</td>
-              <td class="p-4">Jumlah</td>
-              <td class="p-4">Jenis</td>
-              <td class="p-4">Harga</td>
+              <td class="p-4">Deskripsi</td>
+              <td class="p-4">Kolom</td>
             </tr>
-
           </thead>
-          <tbody class="text-lg">
-            <tr class="">
-              <td class="p-4">1.</td>
-              <td class="p-4">Bengsin</td>
-              <td class="p-4">100</td>
-              <td class="p-4">Mobile Gemink</td>
-              <td class="p-4">Rp 25000</td>
-            </tr>
-            <tr class="">
-              <td class="p-4">1.</td>
-              <td class="p-4">Bengsin</td>
-              <td class="p-4">100</td>
-              <td class="p-4">Mobile Gemink</td>
-              <td class="p-4">Rp 25000</td>
-            </tr>
-            <tr class="">
-              <td class="p-4">1.</td>
-              <td class="p-4">Bengsin</td>
-              <td class="p-4">100</td>
-              <td class="p-4">Mobile Gemink</td>
-              <td class="p-4">Rp 25000</td>
-            </tr>
-            <tr class="">
-              <td class="p-4">1.</td>
-              <td class="p-4">Bengsin</td>
-              <td class="p-4">100</td>
-              <td class="p-4">Mobile Gemink</td>
-              <td class="p-4">Rp 25000</td>
-            </tr>
-            <tr class="">
-              <td class="p-4">1.</td>
-              <td class="p-4">Bengsin</td>
-              <td class="p-4">100</td>
-              <td class="p-4">Mobile Gemink</td>
-              <td class="p-4">Rp 25000</td>
-            </tr>
-            <tr class="">
-              <td class="p-4">1.</td>
-              <td class="p-4">Bengsin</td>
-              <td class="p-4">100</td>
-              <td class="p-4">Mobile Gemink</td>
-              <td class="p-4">Rp 25000</td>
-            </tr>
-
-            </tr>
+          <tbody class="text-lg" id="list-tipe">
           </tbody>
         </table>
       </div>
       
-      <button id="input" class="grid content-center w-[200px] h-[60px] mx-auto my-4 border border-[#ff833d] rounded-full text-[#ff833d] text-center text-lg font-bold hover:text-white hover:bg-gradient-to-r hover:from-[#ff833d] hover:to-[#fdd134] hover:border-none hover:transition hover:ease-in hover:duration-300">Tambah Stok</button>
+      <button id="input" class="grid content-center w-[200px] h-[60px] mx-auto my-4 border border-[#ff833d] rounded-full text-[#ff833d] text-center text-lg font-bold hover:text-white hover:bg-gradient-to-r hover:from-[#ff833d] hover:to-[#fdd134] hover:border-none hover:transition hover:ease-in hover:duration-300">Tambah Tipe</button>
       
 
       <div id="form" class="hidden mt-16 bg-gradient-to-l from-[#FF4E00] to-[#FeD020] py-20">
@@ -132,28 +87,25 @@
         <div class="my-3 flex flex-col container mx-auto border border-orange-500 rounded-xl w-[45rem] py-8 bg-white drop-shadow-xl">
           
           <span class="self-center text-4xl text-orange-600 font-bold">Input Data Produk</span>
-          <div class="grid grid-cols-[8rem_1rem_22rem] mt-16 justify-center text-xl">
+          <form class="grid grid-cols-[8rem_1rem_22rem] mt-16 justify-center text-xl">
 
-              <label for="nama" class="pl-4 py-2 text-orange-600 font-bold">Nama</label>
+              <label class="pl-4 py-2 text-orange-600 font-bold">Nama Produk</label>
               <span class="text-orange-600 font-bold py-2">:</span>
               <input type="text" name="nama" id="" class="text-orange-500 font-bold border-b-[2px] border-orange-300 py-2 px-3 mb-4 outline-none focus:border-orange-500">
       
-              <label for="jml" class="pl-4 py-2 text-orange-600 font-bold">Jumlah</label>
+              <label class="pl-4 py-2 text-orange-600 font-bold">Deskripsi</label>
               <span class="text-orange-600 font-bold py-2">:</span>
-              <input type="text" name="jml" id="" class="text-orange-500 font-bold border-b-[2px] border-orange-300 py-2 px-3 mb-4 outline-none focus:border-orange-500">
+              <input type="text" name="deskripsi" id="" class="text-orange-500 font-bold border-b-[2px] border-orange-300 py-2 px-3 mb-4 outline-none focus:border-orange-500">
       
-              <label for="jenis" class="pl-4 py-2 text-orange-600 font-bold">Jenis</label>
+              <label class="pl-4 py-2 text-orange-600 font-bold">Kolom</label>
               <span class="text-orange-600 font-bold py-2">:</span>
-              <input type="text" name="jenis" id="" class="text-orange-500 font-bold border-b-[2px] border-orange-300 py-2 px-3 mb-4 outline-none focus:border-orange-500">
-      
-              <label for="harga" class="pl-4 py-2 text-orange-600 font-bold">Harga</label>
-              <span class="text-orange-600 font-bold py-2">:</span>
-              <input type="text" name="harga" id="" class="text-orange-500 font-bold border-b-[2px] border-orange-300 py-2 px-3 mb-4 outline-none focus:border-orange-500">
+              <input type="text" name="kolom" id="" class="text-orange-500 font-bold border-b-[2px] border-orange-300 py-2 px-3 mb-4 outline-none focus:border-orange-500">
 
-              <div></div>
-              <div></div>
+              <label class="pl-4 py-2 text-orange-600 font-bold">Image</label>
+              <span class="text-orange-600 font-bold py-2">:</span>
+              <input type="file" accept=".jpg,.jpeg,.png" name="image" id="" class="text-orange-500 font-bold border-b-[2px] border-orange-300 py-2 px-3 mb-4 outline-none focus:border-orange-500">
               <button class="ml-auto w-[130px] h-[50px] mt-4 border border-[#ff833d] rounded-full text-[#ff833d] text-center text-base font-bold hover:text-white hover:bg-gradient-to-r hover:from-[#ff833d] hover:to-[#fdd134] hover:border-none hover:transition hover:ease-in hover:duration-300">Tambah</button>
-          </div>
+          </form>
 
         </div>
       </div>
@@ -234,15 +186,37 @@
       <script>
       let open = false;
       $("#input").click(function() {
-          $("#form").slideToggle("slow");
-          if(!open){
-            $('html, body').animate({
-              scrollTop: $("#form").offset().top
-            }, 1000);
-            open = true;
-          } else open = false;
-          
+        $("#form").slideToggle("slow");
+        if(!open){
+          $('html, body').animate({
+            scrollTop: $("#form").offset().top
+          }, 1000);
+          open = true;
+        } else open = false;
+      });
+
+      $("form").submit(async e => {
+        e.preventDefault();
+        var res = await $.post(url + "tipe", $(this).serialize()).promise();
+        $("form")[0].reset();
+        tipe();
+      });
+      async function tipe(){
+        var res = await $.get(url + "tipe").promise();
+        $("#list-tipe").html("");
+        res.data.forEach((dat, i) => {
+          $("#list-tipe").append(`
+          <tr>
+            <td class="p-4">${i + 1}.</td>
+            <td class="p-4"><image class="w-40" src="${url_img + dat.id}"></td>
+            <td class="p-4">${dat.nama}</td>
+            <td class="p-4">${dat.deskripsi}</td>
+            <td class="p-4">${dat.kolom}</td>
+          </tr>
+          `);
         });
+      }
+      tipe();
       </script>
 </body>
 </html>

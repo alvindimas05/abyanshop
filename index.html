@@ -197,6 +197,7 @@
         `);
       });
       var pertama = data.data[0];
+      $("#banner").click(() => location.href = "/purchase.html?id=" + pertama.id)
       $("#bannergambar").attr("src", url_img + pertama.id);
       $("#bannerjudul").text(pertama.nama);
       $("#bannerdeskripsi").text(pertama.deskripsi);
