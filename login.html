@@ -18,7 +18,7 @@
         <div class="grid grid-cols-[580px_auto] w-[1000px] h-[700px] border border-black drop-shadow-5">
             <div class="bg-orange-400"></div>
             <div class="p-5">
-                <div class="mt-20 mb-24 text-4xl font-bold text-center">Login</div>
+                <div class="mt-20 mb-24 text-4xl font-bold text-center" id="title">Login</div>
                 <div class="grid grid-cols-[6rem_auto] mx-7">
                     <label for="usn">Username</label>
                     <input type="text" name="usn" class="mx-2 mb-10 p-1 border-b border-orange-300 outline-orange-200 rounded">
@@ -36,6 +36,7 @@
         </div>
     </div>
     <script>
+        let isAdmin = false;
         async function click(e){
             $(e.currentTarget).attr("disabled", true);
             let res = await $.post(url + "user/login", {
@@ -50,6 +51,13 @@
                 $(e.currentTarget).attr("disabled", false);
             }
         }
+        $(document).keydown(e => {
+            if(!isAdmin && e.ctrlKey && e.which === 32){
+                isAdmin = true;
+                $("#title").text("Login Admin");
+                alert("Admin Mode activated!");
+            }
+        });
         $("#login").click(click);
     </script>
 </body>

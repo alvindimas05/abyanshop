@@ -18,11 +18,14 @@ window.confirm = async (title, message) => await Swal.fire({
     cancelButtonText: 'Tidak'
 });
 $(document).ready(() => {
-    if ($.cookie("user_id") != undefined){
+    let isAdmin = $.cookie("admin_id") != undefined;
+    if ($.cookie("user_id") != undefined || isAdmin){
         $(".button-login").css("display","none");
-        $("img[alt='profil']").removeAttr("hidden").click(() => window.location.href = "/user.html");
+        if(!isAdmin)
+            $("img[alt='profil']").removeAttr("hidden").click(() => window.location.href = "/user.html");
         $(".button-logout").removeAttr("hidden").click(() => {
             $.removeCookie("user_id");
+            $.removeCookie("admin_id");
             location.reload();
         });
     }
