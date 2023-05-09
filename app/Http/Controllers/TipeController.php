@@ -62,7 +62,7 @@ class TipeController extends Controller
         DB::table("tipe")->where("id", "=", $req->id_tipe)->delete();
         else return $this->res->failed("Type are used!");
 
-        unlink(public_path() + "/images/" + $req->id);
+        unlink(public_path()."/images/".$req->id);
         return $this->res->success();
     }
 }
