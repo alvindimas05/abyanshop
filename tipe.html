@@ -80,6 +80,7 @@
             <td class="p-4">Nama Produk</td>
             <td class="p-4">Deskripsi</td>
             <td class="p-4">Kolom</td>
+            <td class="p-4">Aksi</td>
           </tr>
         </thead>
         <tbody class="text-lg" id="list-tipe"></tbody>
@@ -102,7 +103,7 @@
           <input type="text" name="kolom" id="" class="text-orange-500 font-bold border-b-[2px] border-orange-300 py-2 px-3 mb-4 outline-none focus:border-orange-500">
           <label class="pl-4 py-2 text-orange-600 font-bold">Image</label>
           <span class="text-orange-600 font-bold py-2">:</span>
-          <input type="file" accept=".jpg,.jpeg,.png" name="image" id="" class="text-orange-500 font-bold border-b-[2px] border-orange-300 py-2 px-3 mb-4 outline-none focus:border-orange-500">
+          <input type="file" accept=".jpg,.jpeg,.png" name="image" class="text-orange-500 font-bold border-b-[2px] border-orange-300 py-2 px-3 mb-4 outline-none focus:border-orange-500">
           <button class="ml-auto w-[130px] h-[50px] mt-4 border border-[#ff833d] rounded-full text-[#ff833d] text-center text-base font-bold hover:text-white hover:bg-gradient-to-r hover:from-[#ff833d] hover:to-[#fdd134] hover:border-none hover:transition hover:ease-in hover:duration-300">Tambah</button>
         </form>
       </div>
@@ -203,17 +204,54 @@
         $("#list-tipe").html("");
         res.data.forEach((dat, i) => {
           $("#list-tipe").append(`
-          <tr>
-            <td class="p-4">${i + 1}.</td>
-            <td class="p-4">
-              <image class="w-40" src="${url_img + dat.id}">
+            <tr isEdit="0" id_tipe="${dat.id}">
+              <td class="p-4">${i + 1}.</td>
+              <td class="p-4" >
+                <image class="w-40" src="${url_img + dat.id}">
+                <input type="file" id_tipe="${dat.id}" style="display: none;">
               </td>
-              <td class="p-4">${dat.nama}</td>
-              <td class="p-4">${dat.deskripsi}</td>
-              <td class="p-4">${dat.kolom}</td>
+              <td class="p-4 outline-white focus:outline" id_tipe="${dat.id}">${dat.nama}</td>
+              <td class="p-4 outline-white focus:outline" id_tipe="${dat.id}">${dat.deskripsi}</td>
+              <td class="p-4 outline-white focus:outline" id_tipe="${dat.id}">${dat.kolom}</td>
+              <td class="p-4">
+                <button onclick="edit(${dat.id})"  class="text-white bg-orange-600 hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-3 mb-1">Edit</button>  
+                <br>
+                <button onclick="hapus(${dat.id})" id_tipe="${dat.id}" class="button-hapus text-white bg-orange-600 hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-3 mt-1">Hapus</button>  
+              </td>
             </tr>
           `);
         });
+      }
+      function edit(id){
+        let tr = $(`tr[id_tipe="${id}"]`),
+        td = $(`td[id_tipe="${id}"]`);
+        if(tr.attr("isEdit") === "0"){
+          tr.attr("isEdit", 1);
+          td.attr("contenteditable", "true");
+          $(`.button-hapus[id_tipe="${id}"]`).text("Batalkan");
+        }
+      }
+      async function hapus(id){
+        let tr = $(`tr[id_tipe="${id}"]`),
+        td = $(`td[id_tipe="${id}"]`);
+        if(tr.attr("isEdit") === "1"){
+          tr.attr("isEdit", 0);
+          td.removeAttr("contenteditable");
+          $(`.button-hapus[id_tipe="${id}"]`).text("Hapus");
+        } else {
+          let res = await confirm("Apakah kamu yakin akan menghapus tipe ini?");
+          if(!res.isConfirmed) return;
+          Swal.showLoading();
+          await $.ajax({
+            url:url + "tipe",
+            method:"DELETE",
+            data:{
+              admin_id:$.cookie("admin_id"),
+              id_tipe:id
+            }
+          }).promise();
+          tipe();
+        }
       }
       $("form").submit(async e => {
         e.preventDefault();
