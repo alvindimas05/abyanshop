@@ -39,13 +39,13 @@ class TipeController extends Controller
     }
     // admin_id, id, nama, deskripsi, image
     public function edit(Request $req){
+        if(!$this->res->isAdmin($req->admin_id)) return $this->res->failed();
+        if(!$this->isTipeExist($req->id)) return $this->res->failed("Type not found!");
+        
         if($req->hasFile("image")){
             $req->validate(["image" => "mimes:jpg,jpeg,png|max:3000"]);
             $req->file("image")->move(public_path()."/images", $req->id);
         }
-
-        if(!$this->res->isAdmin($req->admin_id)) return $this->res->failed();
-        if(!$this->isTipeExist($req->id)) return $this->res->failed("Type not found!");
         DB::table("tipe")->where("id", "=", $req->id)->update([
             "nama" => $req->nama,
             "deskripsi" => $req->deskripsi,
