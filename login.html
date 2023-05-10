@@ -18,15 +18,24 @@
         <div class="grid grid-cols-[580px_auto] w-[1000px] h-[700px] border border-black drop-shadow-5">
             <div class="bg-orange-400"></div>
             <div class="p-5">
-                <div class="mt-20 mb-24 text-4xl font-bold text-center" id="title">Login</div>
-                <div class="grid grid-cols-[6rem_auto] mx-7">
-                    <label for="usn">Username</label>
-                    <input type="text" name="usn" class="mx-2 mb-10 p-1 border-b border-orange-300 outline-orange-200 rounded">
-                    <label for="pass">Password</label>
-                    <input type="password" name="pass" class="mx-2 mb-16 border-b border-orange-300 outline-orange-200 rounded">
+                
+                <div class="mt-20 mb-16 text-4xl font-bold text-center">
+                    <div id="title" class="grid grid-cols-1">
+                        <span>WELCOME</span>
+                        <span class="my-2">TO</span>
+                        <div>
+                            <span class="text-[#ea7600]">ABYAN</span>
+                            <span class="text-[#2f4f4f]">SHOP</span>
+                        </div>
+                    </div>
                 </div>
+
+                    <label for="usn" class="inline-block absolute translate-x-[30px] -translate-y-[10px] bg-white px-1">Username</label>
+                    <input type="text" name="usn" class="mx-2 mb-10 px-6 py-4 border border-black w-full outline-none rounded-full focus:placeholder:opacity-0" placeholder="example">
+                    <label for="pass" class="inline-block absolute translate-x-[30px] -translate-y-[10px] bg-white px-1">Password</label>
+                    <input type="password" name="pass" class="mx-2 mb-10 px-6 py-4 border border-black w-full outline-none rounded-full focus:placeholder:opacity-0" placeholder="example123">
                 <div class="flex justify-center mb-3">
-                    <button class="text-center px-7 py-2 border border-orange-300 mx-auto" id="login">Login</button>
+                    <button class="text-center px-7 py-2 border border-orange-300 mx-auto rounded-full hover:bg-orange-500 hover:text-white hover:ease-in hover:duration-200" id="login">Login</button>
                 </div>
                 <div class="flex justify-center">
                     <span>New user?&nbsp;</span>
