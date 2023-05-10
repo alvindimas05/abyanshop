@@ -72,18 +72,20 @@
       </div>
     </nav>
     <div class="container my-8 mx-auto rounded-2xl text-white">
+      <h1 id="tipe-produk" class="text-2xl font-bold">Tipe</h1>
+      <select id="tipe-tipe" class="float-right px-3 py-2 rounded">
+        <option value="">Pilih Tipe</option>
+      </select>
       <table class="w-full bg-gradient-to-r from-[#FF4E00] to-[#FeD020]">
         <thead class="font-bold border-b border-whitex text-xl">
           <tr>
             <td class="p-4">No.</td>
-            <td class="p-4">Preview</td>
             <td class="p-4">Nama Produk</td>
-            <td class="p-4">Deskripsi</td>
-            <td class="p-4">Kolom</td>
+            <td class="p-4">Harga</td>
             <td class="p-4">Aksi</td>
           </tr>
         </thead>
-        <tbody class="text-lg" id="list-tipe"></tbody>
+        <tbody class="text-lg" id="list-produk"></tbody>
       </table>
     </div>
     <button id="input" class="grid content-center w-[200px] h-[60px] mx-auto my-4 border border-[#ff833d] rounded-full text-[#ff833d] text-center text-lg font-bold hover:text-white hover:bg-gradient-to-r hover:from-[#ff833d] hover:to-[#fdd134] hover:border-none hover:transition hover:ease-in hover:duration-300">Tambah Tipe</button>
@@ -95,15 +97,14 @@
           <label class="pl-4 py-2 text-orange-600 font-bold">Nama Produk</label>
           <span class="text-orange-600 font-bold py-2">:</span>
           <input type="text" name="nama" id="" class="text-orange-500 font-bold border-b-[2px] border-orange-300 py-2 px-3 mb-4 outline-none focus:border-orange-500">
-          <label class="pl-4 py-2 text-orange-600 font-bold">Deskripsi</label>
+          <label class="pl-4 py-2 text-orange-600 font-bold">Harga</label>
           <span class="text-orange-600 font-bold py-2">:</span>
-          <input type="text" name="deskripsi" id="" class="text-orange-500 font-bold border-b-[2px] border-orange-300 py-2 px-3 mb-4 outline-none focus:border-orange-500">
-          <label class="pl-4 py-2 text-orange-600 font-bold">Kolom</label>
+          <input type="number" inputmode="numeric" name="harga" id="" class="text-orange-500 font-bold border-b-[2px] border-orange-300 py-2 px-3 mb-4 outline-none focus:border-orange-500">
+          <label class="pl-4 py-2 text-orange-600 font-bold">Tipe</label>
           <span class="text-orange-600 font-bold py-2">:</span>
-          <input type="text" name="kolom" id="" class="text-orange-500 font-bold border-b-[2px] border-orange-300 py-2 px-3 mb-4 outline-none focus:border-orange-500">
-          <label class="pl-4 py-2 text-orange-600 font-bold">Image</label>
-          <span class="text-orange-600 font-bold py-2">:</span>
-          <input type="file" accept=".jpg,.jpeg,.png" name="image" class="text-orange-500 font-bold border-b-[2px] border-orange-300 py-2 px-3 mb-4 outline-none focus:border-orange-500">
+          <select class="px-2" name="id_tipe" id="form-tipe">
+            <option>Pilih Tipe</option>
+          </select>
           <button class="ml-auto w-[130px] h-[50px] mt-4 border border-[#ff833d] rounded-full text-[#ff833d] text-center text-base font-bold hover:text-white hover:bg-gradient-to-r hover:from-[#ff833d] hover:to-[#fdd134] hover:border-none hover:transition hover:ease-in hover:duration-300">Tambah</button>
         </form>
       </div>
@@ -199,85 +200,109 @@
         } else open = false;
       });
       $("#admin_id").val($.cookie("admin_id"));
-      async function tipe() {
-        var res = await $.get(url + "tipe").promise();
-        $("#list-tipe").html("");
+      $("#tipe-tipe").change(async e => {
+        var target = $("#tipe-tipe option:selected");
+        $("#tipe-produk").text(target.html());
+        var res = await $.get(url + "produk" + (target.val() != "" ? ("?id_produk=" + target.val()) : "")).promise();
+        $("#list-produk").html("");
+        if(res.data.length < 1) $("#list-produk").append(`<tr><td class="text-2xl font-medium pt-2" colspan="4">Tidak ada data...</td></tr>`);
         res.data.forEach((dat, i) => {
-          $("#list-tipe").append(`
-            <tr isEdit="0" id_tipe="${dat.id}">
+          $("#list-produk").append(`
+            <tr isEdit="0" id_produk="${dat.id}">
               <td class="p-4">${i + 1}.</td>
-              <td class="p-4" >
-                <image class="w-40" src="${url_img + dat.id}">
-                <input type="file" id_tipe="${dat.id}" class="mt-2" style="display: none;">
-              </td>
-              <td class="p-4 outline-white focus:outline" id_tipe="${dat.id}" name="nama">${dat.nama}</td>
-              <td class="p-4 outline-white focus:outline" id_tipe="${dat.id}" name="deskripsi">${dat.deskripsi}</td>
-              <td class="p-4 outline-white focus:outline" id_tipe="${dat.id}" name="kolom">${dat.kolom}</td>
+              <td class="p-4 outline-white focus:outline" id_produk="${dat.id}" name="nama">${dat.nama}</td>
+              <td class="p-4 outline-white focus:outline" id_produk="${dat.id}" name="harga">${dat.harga}</td>
               <td class="p-4">
                 <button onclick="edit(${dat.id})"  class="text-white bg-orange-600 hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-3 mb-1">Edit</button>  
                 <br>
-                <button onclick="hapus(${dat.id})" id_tipe="${dat.id}" class="button-hapus text-white bg-orange-600 hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-3 mt-1">Hapus</button>  
+                <button onclick="hapus(${dat.id})" id_produk="${dat.id}" class="button-hapus text-white bg-orange-600 hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-3 mt-1">Hapus</button>  
               </td>
             </tr>
           `);
         });
+      });
+      async function produk() {
+        var res = await $.get(url + "produk").promise(),
+        res2 = await $.get(url + "tipe").promise();
+        $("#list-produk").html("");
+        res.data.forEach((dat, i) => {
+          $("#list-produk").append(`
+            <tr isEdit="0" id_produk="${dat.id}">
+              <td class="p-4">${i + 1}.</td>
+              <td class="p-4 outline-white focus:outline" id_produk="${dat.id}" name="nama">${dat.nama}</td>
+              <td class="p-4 outline-white focus:outline" id_produk="${dat.id}" name="harga">Rp ${dat.harga.toLocaleString("de-DE")}</td>
+              <td class="p-4">
+                <button onclick="edit(${dat.id},${dat.id_tipe})"  class="text-white bg-orange-600 hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-3 mb-1">Edit</button>  
+                <br>
+                <button onclick="hapus(${dat.id})" id_produk="${dat.id}" class="button-hapus text-white bg-orange-600 hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-3 mt-1">Hapus</button>  
+              </td>
+            </tr>
+          `);
+        });
+        $("#tipe-tipe,#form-tipe").html("<option>Pilih Tipe</option>");
+        res2.data.forEach(dat => $("#tipe-tipe,#form-tipe").append(`<option value="${dat.id}">${dat.nama}</option>`));
       }
-      async function edit(id){
-        let tr = $(`tr[id_tipe="${id}"]`),
-        td = $(`td[id_tipe="${id}"]`);
+      async function edit(id, id_tipe){
+        let tr = $(`tr[id_produk="${id}"]`),
+        td = $(`td[id_produk="${id}"]`);
         if(tr.attr("isEdit") === "0"){
           tr.attr("isEdit", 1);
           td.attr("contenteditable", "true");
-          $(`input[type="file"][id_tipe="${id}"]`).css("display", "");
-          $(`.button-hapus[id_tipe="${id}"]`).text("Batalkan");
+          $(`input[type="file"][id_produk="${id}"]`).css("display", "");
+          $(`.button-hapus[id_produk="${id}"]`).text("Batalkan");
         } else {
           let form = new FormData();
           form.append("_method", "PUT");
           form.append("admin_id", $.cookie("admin_id"));
           form.append("id", id);
-          let file = $(`input[type="file"][id_tipe="${id}"]`)[0].files;
-          if(file.length > 0) form.append("image", file[0]); 
-          $(`td[id_tipe="${id}"]`).each((i, dat) => form.append(dat.getAttribute("name"), dat.innerHTML));
+          form.append("id_tipe", id_tipe);
+          $(`td[id_produk="${id}"]`).each((i, dat) => form.append(dat.getAttribute("name"),
+          dat.getAttribute("name") == "harga" ? parseInt(dat.innerHTML.replace(" ", "").replace("Rp", "").replace(".", "")) : dat.innerHTML));
 
           Swal.showLoading();
           await $.ajax({
-            url:url + "tipe",
+            url:url + "produk",
             method:"POST",
             data:form,
             contentType:false,
             processData:false
           }).promise();
           Swal.close();
-          tipe();
+          produk();
         }
       }
       async function hapus(id){
-        let tr = $(`tr[id_tipe="${id}"]`),
-        td = $(`td[id_tipe="${id}"]`);
+        let tr = $(`tr[id_produk="${id}"]`),
+        td = $(`td[id_produk="${id}"]`);
         if(tr.attr("isEdit") === "1"){
           tr.attr("isEdit", 0);
           td.removeAttr("contenteditable");
-          $(`.button-hapus[id_tipe="${id}"]`).text("Hapus");
+          $(`.button-hapus[id_produk="${id}"]`).text("Hapus");
         } else {
-          let res = await confirm("Apakah kamu yakin akan menghapus tipe ini?");
+          let res = await confirm("Apakah kamu yakin akan menghapus produk ini?");
           if(!res.isConfirmed) return;
           Swal.showLoading();
-          await $.ajax({
-            url:url + "tipe",
-            method:"DELETE",
-            data:{
-              admin_id:$.cookie("admin_id"),
-              id_tipe:id
-            }
-          }).promise();
-          tipe();
+          try {
+            let res2 = await $.ajax({
+              url:url + "produk",
+              method:"DELETE",
+              data:{
+                admin_id:$.cookie("admin_id"),
+                id:id,
+                id_produk:id
+              }
+            }).promise();
+          } catch(err){
+            alert("Terjadi kesalahan! Bisa karena histori user");
+          }
+          produk();
         }
       }
       $("form").submit(async e => {
         e.preventDefault();
         var form = new FormData($("form")[0]);
         var res = await $.ajax({
-          url:url + "tipe",
+          url:url + "produk",
           method:"POST",
           data:form,
           contentType:false,
@@ -285,9 +310,9 @@
         }).promise();
         alert("Data berhasil ditambahkan!");
         $("form")[0].reset();
-        tipe();
+        produk();
       });
-      tipe();
+      produk();
     </script>
   </body>
 </html>
