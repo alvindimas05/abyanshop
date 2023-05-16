@@ -1,4 +1,4 @@
-const url = 'http://ancritbat.my.id:8880/api/',
+const url = 'https://ancritbat.my.id/api/',
 url_img = url + "../images/";
 
 window.alert = async (message) => await Swal.fire({
@@ -42,4 +42,5 @@ $(document).ready(() => {
             location.reload();
         });
     }
+    $('button[data-collapse-toggle="navbar-search"]').css("display", "none");
 });

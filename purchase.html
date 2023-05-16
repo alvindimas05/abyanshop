@@ -299,6 +299,8 @@
     produk();
     $("#formbeli").submit(async e => {
       e.preventDefault();
+      if($.cookie("user_id") == undefined)
+        return alert("Kamu harus login terlebih dahulu!").then(() => location.href = "/login.html");
       var res = await $.post(url + "user/beli", {
         user_id: $.cookie("user_id"),
         id_produk: $("#qty option:selected").val()
