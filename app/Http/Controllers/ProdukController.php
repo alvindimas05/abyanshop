@@ -41,8 +41,7 @@ class ProdukController extends Controller
         Produk::where("id", "=", $req->id)->update([
             "nama" => $req->nama,
             "harga" => $req->harga,
-            "id_tipe" => $req->id_tipe,
-            "total_penjualan" => 0
+            "id_tipe" => $req->id_tipe
         ]);
         return $this->res->success();
     }
