@@ -12,8 +12,11 @@ Route::prefix("api")->group(function(){
         Route::get("", "details");
         Route::post("", "create");
         Route::post("login", "login");
-        Route::post("beli", "beli");
-        Route::get("riwayat", "riwayat");
+    });
+
+    Route::controller(PembelianController::class)->prefix("user")->group(function (){
+        Route::get("beli", "beli");
+        Route::post("riwayat", "riwayat");
         Route::post("top_up", "top_up");
     });
 
@@ -30,5 +33,6 @@ Route::prefix("api")->group(function(){
         Route::put("", "edit");
         Route::delete("", "delete");
     });
+
     Route::post("/admin/login", [UserController::class, "login_admin"]);
 });
