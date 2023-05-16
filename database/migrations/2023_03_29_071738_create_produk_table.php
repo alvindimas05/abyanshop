@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('nama', 100);
             $table->integer('harga');
             $table->integer('id_tipe')->index('id_tipe');
-            $table->integer('total_penjualan');
         });
     }
 

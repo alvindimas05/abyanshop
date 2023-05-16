@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Produk;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -13,10 +14,10 @@ class ProdukController extends Controller
         $this->res = $rescon;
     }
     public function isProdukExist($id){
-        return DB::table("produk")->where("id", "=", $id)->exists();
+        return Produk::where("id", "=", $id)->exists();
     }
     public function get(Request $req){
-        $data = DB::table("produk");
+        $data = new Produk;
         if($req->has("id_tipe")) $data = $data->where("id_tipe", "=", $req->id_tipe);
         $data = $data->get();
         return $this->res->success($data);
@@ -25,8 +26,8 @@ class ProdukController extends Controller
     public function add(Request $req){
         if(!$this->res->isAdmin($req->admin_id))
         return $this->res->failed("Produk not found!");
-        DB::table("produk")->insert([
-            "id" => null,   
+        Produk::insert([
+            "id" => null,
             "nama" => $req->nama,
             "harga" => $req->harga,
             "id_tipe" => $req->id_tipe,
@@ -38,7 +39,7 @@ class ProdukController extends Controller
     public function edit(Request $req){
         if(!$this->res->isAdmin($req->admin_id)) return $this->res->failed();
         if(!$this->isProdukExist($req->id)) return $this->res->failed("Produk not found!");
-        DB::table("produk")->where("id", "=", $req->id)->update([
+        Produk::where("id", "=", $req->id)->update([
             "nama" => $req->nama,
             "harga" => $req->harga,
             "id_tipe" => $req->id_tipe,
@@ -50,7 +51,7 @@ class ProdukController extends Controller
     public function delete(Request $req){
         if(!$this->res->isAdmin($req->admin_id)) return $this->res->failed();
         if(!$this->isProdukExist($req->id)) return $this->res->failed("Produk not found!");
-        DB::table("produk")->where("id", "=", $req->id_produk)->delete();
+        Produk::where("id", "=", $req->id_produk)->delete();
         return $this->res->success();
     }
 }
