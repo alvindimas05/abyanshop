@@ -24,11 +24,10 @@ class PembelianController extends Controller
         if(!$this->pro->isProdukExist($req->id_produk)) return $this->res->failed("Produk not found!");
 
         $user = User::where("user_id", "=", $req->user_id)->get(["saldo"])->first();
-        $produk = Produk::where("id", "=", $req->id_produk)->get(["harga", "total_penjualan"])->first();
+        $produk = Produk::where("id", "=", $req->id_produk)->get(["harga"])->first();
 
         if($user->saldo < $produk->harga) return $this->res->failed("Saldo tidak cukup!");
         User::where("user_id", "=", $req->user_id)->update([ "saldo" => $user->saldo - $produk->harga ]);
-        Produk::where("id", "=", $req->id_produk)->update([ "total_penjualan" => $produk->total_penjualan ]);
 
         DB::table("history")->insert([
             "id" => null,
