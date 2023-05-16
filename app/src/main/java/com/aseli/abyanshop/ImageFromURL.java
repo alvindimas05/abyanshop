@@ -22,7 +22,7 @@ public class ImageFromURL {
     }
 }
 class ImageFromURLAsync extends AsyncTask<Void, Void, Bitmap> {
-    private String url = "http://ancritbat.my.id:8880/api/";
+    private String url = "https://ancritbat.my.id/api/";
     private ImageView image;
     private Activity activity;
     private int id;

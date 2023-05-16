@@ -21,12 +21,13 @@
             app:srcCompat="@drawable/tes" />
     </LinearLayout>
     <TextView
+        android:id="@+id/pembelian_nama"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_bold"
         android:padding="5dp"
         android:textColor="@color/black"
-        android:text="Pengangguran Simulator"
+        android:text="Nama Game"
         android:textSize="30sp" />
     <LinearLayout
         android:id="@+id/pembelian_inputs"

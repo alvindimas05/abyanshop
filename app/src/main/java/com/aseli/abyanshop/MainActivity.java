@@ -154,16 +154,18 @@ class ProdukTask extends AsyncTask<Void, Void, List<LinearLayout>> {
 
                 JSONObject dat = data.getJSONObject(i);
                 int id = dat.getInt("id");
-                String kolom = dat.getString("kolom");
+                String kolom = dat.getString("kolom"),
+                    nama = dat.getString("nama");
                 CardView card = (CardView) layout.getChildAt(second ? 1 : 0);
                 ImageView image = (ImageView) card.getChildAt(0);
 
                 new ImageFromURL(image, id).setImage(activity);
-                ((TextView) card.getChildAt(1)).setText(dat.getString("nama"));
+                ((TextView) card.getChildAt(1)).setText(nama);
                 card.setVisibility(View.VISIBLE);
                 card.setOnClickListener(v -> {
                     Intent intent = new Intent(activity, PembelianActivity.class);
                     intent.putExtra("id", id);
+                    intent.putExtra("nama", nama);
                     intent.putExtra("kolom", kolom);
                     activity.startActivity(intent);
                 });

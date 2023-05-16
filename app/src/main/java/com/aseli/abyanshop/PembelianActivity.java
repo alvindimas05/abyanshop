@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -57,17 +58,14 @@ public class PembelianActivity extends AppCompatActivity {
             ((TextView) layout.getChildAt(0)).setText(kolom);
             ((LinearLayout) findViewById(R.id.pembelian_inputs)).addView(layout);
         }
-        try {
-            new ImageFromURL(findViewById(R.id.pembelian_image), extras.getInt("id")).setImage(this);
-        } catch (Exception e) {
-            Log.w("Pembelian Image", e);
-        }
+        ((TextView) findViewById(R.id.pembelian_nama)).setText(extras.getString("nama"));
         JSONArray data = null;
         try {
             data = new PembelianTask(this, extras.getInt("id")).execute().get();
         } catch (Exception e) {
             Log.w("Pembelian Error", e);
         }
+        new BeliImageTask(this, findViewById(R.id.pembelian_image), extras.getInt("id")).execute();
         // Spinner onSelected
         Spinner spinner = findViewById(R.id.pembelian_produk);
         finalData = data;
@@ -118,6 +116,26 @@ public class PembelianActivity extends AppCompatActivity {
         }
     }
 }
+class BeliImageTask extends AsyncTask<Void, Void, Void> {
+    private ImageView imageView;
+    private int id;
+    private Activity activity;
+    public BeliImageTask(Activity activity, ImageView imageView, int id){
+        this.activity = activity;
+        this.imageView = imageView;
+        this.id = id;
+    }
+    @Override
+    protected Void doInBackground(Void... voids) {
+        try {
+            new ImageFromURL(imageView, id).setImage(activity);
+        } catch (Exception e) {
+            Log.w("Pembelian Image", e);
+        }
+        return null;
+    }
+}
+
 class BeliTask extends AsyncTask<Void, Void, JSONObject>{
     private ProgressDialog pd;
     private Activity activity;

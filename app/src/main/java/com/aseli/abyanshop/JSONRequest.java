@@ -26,7 +26,7 @@ import java.util.Map;
 public class JSONRequest {
     private int method = -1;
     // Ganti url jika link api-mu berbeda
-    private String url = "http://ancritbat.my.id:8880/api/",
+    private String url = "https://ancritbat.my.id/api/",
             path;
     private HashMap<String, String> postData;
     public static final int
