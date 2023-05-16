@@ -247,7 +247,7 @@
         td = $(`td[id_produk="${id}"]`);
         if(tr.attr("isEdit") === "0"){
           tr.attr("isEdit", 1);
-          td.attr("contenteditable", "true");
+          td.attr("contenteditable", "plaintext-only");
           $(`input[type="file"][id_produk="${id}"]`).css("display", "");
           $(`.button-hapus[id_produk="${id}"]`).text("Batalkan");
         } else {

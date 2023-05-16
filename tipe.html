@@ -206,13 +206,13 @@
         res.data.forEach((dat, i) => {
           $("#list-tipe").append(`
             <tr isEdit="0" id_tipe="${dat.id}">
-              <td class="p-4">${i + 1}.</td>
-              <td class="p-4 w-40" >
-                <image class="w-40" src="${url_img + dat.id}">
-                <input type="file" id_tipe="${dat.id}" class="mt-2" style="display: none;">
+              <td class="p-4 w-fit">${i + 1}.</td>
+              <td class="p-4 w-60" >
+                <image class="w-60" src="${url_img + dat.id}">
+                <input class="w-60 mt-2" type="file" id_tipe="${dat.id}" class="mt-2" style="display: none;">
               </td>
               <td class="p-4 outline-white focus:outline" id_tipe="${dat.id}" name="nama">${dat.nama}</td>
-              <td class="p-4 outline-white focus:outline" id_tipe="${dat.id}" name="deskripsi">${dat.deskripsi}</td>
+              <td class="p-4 outline-white w-1/2 focus:outline" id_tipe="${dat.id}" name="deskripsi">${dat.deskripsi}</td>
               <td class="p-4 outline-white focus:outline" id_tipe="${dat.id}" name="kolom">${dat.kolom}</td>
               <td class="p-4">
                 <button onclick="edit(${dat.id})"  class="text-white bg-orange-600 hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-3 mb-1">Edit</button>  
@@ -228,7 +228,7 @@
         td = $(`td[id_tipe="${id}"]`);
         if(tr.attr("isEdit") === "0"){
           tr.attr("isEdit", 1);
-          td.attr("contenteditable", "true");
+          td.attr("contenteditable", "plaintext-only");
           $(`input[type="file"][id_tipe="${id}"]`).css("display", "");
           $(`.button-hapus[id_tipe="${id}"]`).text("Batalkan");
         } else {
@@ -236,6 +236,8 @@
           form.append("_method", "PUT");
           form.append("admin_id", $.cookie("admin_id"));
           form.append("id", id);
+          
+          let desk = form.get("deskripsi");
           let file = $(`input[type="file"][id_tipe="${id}"]`)[0].files;
           if(file.length > 0) form.append("image", file[0]); 
           $(`td[id_tipe="${id}"]`).each((i, dat) => form.append(dat.getAttribute("name"), dat.innerHTML));
@@ -290,7 +292,6 @@
         tipe();
       });
       tipe();
-
       $("#file").on('change', e => $("#label-file").text($(e.currentTarget)[0].files[0].name));
     </script>
   </body>
