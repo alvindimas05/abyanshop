@@ -21,8 +21,21 @@ $(document).ready(() => {
     let isAdmin = $.cookie("admin_id") != undefined;
     if ($.cookie("user_id") != undefined || isAdmin){
         $(".button-login").css("display","none");
-        if(!isAdmin)
-            $("img[alt='profil']").removeAttr("hidden").click(() => window.location.href = "/user.html");
+
+        if(isAdmin){
+            $("#nav-list").html("");
+            $("#nav-list").append(`
+            <li>
+              <a href="/" class="block py-2 pl-3 pr-4 text-white bg-orange-700 rounded md:bg-transparent md:text-orange-700 md:p-0 md:text-lg" aria-current="page">Home</a>
+            </li>
+            <li>
+              <a href="/tipe.html" class="block py-2 pl-3 pr-4 text-white bg-orange-700 rounded md:bg-transparent md:text-orange-700 md:p-0 md:text-lg" aria-current="page">Tipe</a>
+            </li>
+            <li>
+              <a href="/produk.html" class="block py-2 pl-3 pr-4 text-white bg-orange-700 rounded md:bg-transparent md:text-orange-700 md:p-0 md:text-lg" aria-current="page">Produk</a>
+            </li>
+            `);
+        } else $("img[alt='profil']").removeAttr("hidden").click(() => window.location.href = "/user.html");
         $(".button-logout").removeAttr("hidden").click(() => {
             $.removeCookie("user_id");
             $.removeCookie("admin_id");
