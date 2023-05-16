@@ -14,26 +14,42 @@
     <script src="global.js"></script>
 </head>
 <body>
-    <div class="flex items-center justify-center h-screen">
-        <div class="grid grid-cols-[580px_auto] w-[1000px] h-[700px] border border-black drop-shadow-5">
-            <div class="bg-orange-400"></div>
-            <div class="p-5">
-                <div class="mt-20 mb-24 text-4xl font-bold text-center">Create Account</div>
-                <div class="grid grid-cols-[6rem_auto] mx-7">
-                    <label for="usn">Username</label>
-                    <input type="text" name="usn" class="mx-2 mb-10 p-1 border-b border-orange-300 outline-orange-200 rounded">
-                    <label for="pass">Password</label>
-                    <input type="password" name="pass" class="mx-2 mb-16 border-b border-orange-300 outline-orange-200 rounded">
-                    <label for="pass">Konfirmasi Password</label>
-                    <input type="password" name="vpass" class="mx-2 mb-16 border-b border-orange-300 outline-orange-200 rounded">
+    <div class="relative ">
+        <img src="asset/bg.png" class="w-full h-[100vh]">
+        <div class="absolute top-[30px] right-[180px]">
+            <div class="mt-20 mb-16 text-6xl font-bold text-center">
+                <div id="title" class="grid grid-cols-1">
+                    <div>
+                        <span class="text-[#ea7600]">ABYAN</span>
+                        <span class="text-[#2f4f4f]">SHOP</span>
+                    </div>
+                    <span class="text-gray-700 text-base">*Please create an account before using this service.</span>
+                </div>
+            </div>
+            <div class="text-lg">
+                <div class="grid grid-cols-1">
+                    <div>
+                        <label for="usn" class="inline-block absolute translate-x-[30px] -translate-y-[10px] bg-white px-1">Username</label>
+                        <input type="text" name="usn" class="mx-2 mb-10 px-6 py-4 border border-[#2f4f4f] w-[500px] outline-none rounded-full focus:placeholder:opacity-0" placeholder="example">
+                    </div>
+                    <div>           
+                        <label for="pass" class="inline-block absolute translate-x-[30px] -translate-y-[10px] bg-white px-1">Password</label>
+                        <input type="password" name="pass" class="mx-2 mb-10 px-6 py-4 border border-black w-[500px] outline-none rounded-full focus:placeholder:opacity-0" placeholder="example123">
+                    </div>
+                    <div>           
+                        <label for="pass" class="inline-block absolute translate-x-[30px] -translate-y-[10px] bg-white px-1">Konfirmasi Password</label>
+                        <input type="password" name="vpass" class="mx-2 mb-10 px-6 py-4 border border-black w-[500px] outline-none rounded-full focus:placeholder:opacity-0" placeholder="example123">
+                    </div>
+
                 </div>
                 <div class="flex justify-center mb-3">
-                    <button class="text-center px-7 py-2 border border-orange-300 mx-auto" id="create">Create Account</button>
+                    <button class="text-center font-bold text-orange-400 px-7 py-2 border border-orange-300 mx-auto rounded-full hover:bg-orange-500 hover:text-white hover:ease-in hover:duration-200" id="login">Register</button>
                 </div>
-                <div class="flex justify-center">
-                    <span>Have an account?&nbsp;</span>
-                    <a href="login.html" class="text-center text-orange-400 underline">Login</a>
-                </div>
+            </div>
+                
+            <div class="flex justify-center">
+                <span>Already have an account?&nbsp;</span>
+                <a href="login.html" class="text-center text-orange-700 hover:underline">Login</a>
             </div>
         </div>
     </div>

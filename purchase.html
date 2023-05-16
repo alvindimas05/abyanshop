@@ -73,13 +73,13 @@
     </nav>
 
     <div class="container mx-auto my-8 bg-orange-400 md:grid md:grid-cols-2 rounded-xl">
-      <img id="bannergambar" class="w-full h-full rounded-b-lg mx-auto md:rounded-lg lg:p-4">
-      <div class="py-4 px-4 font-bold text-xl lg:text-3xl mx-auto">
+      <img id="bannergambar" class="w-full rounded-b-lg mx-auto md:rounded-lg md:self-center lg:rounded-lg lg:p-4">
+      <div class="py-4 px-4 font-bold text-xl lg:text-3xl mx-auto ">
         <span id="bannerjudul"></span>
         <div class="text-lg font-semibold mt-3">
-          <span id="bannerdeskripsi"></span>
+          <span id="bannerdeskripsi" class="text-sm text-left lg:text-base"></span>
           <div class="container mt-5">
-            <form class="grid grid-cols-[6rem_auto] gap-y-3" id="formbeli">
+            <form class="grid grid-cols-[6rem_auto] gap-y-3 text-base lg:text-lg" id="formbeli">
               <!--
                          
                        <label for="server" class="self-center">Server</label><input type="text" class="rounded-xl py-2 px-4" name="server"><label for="qty" class="self-center">Jumlah</label><select class="py-2 px-4 rounded-xl" name="qty" id="qty"><option></option><option value="1">100 Diamonds</option><option value="2">200 Diamonds</option><option value="3">300 Diamonds</option><option value="4">400 Diamonds</option><option value="5">500 Diamonds</option><option value="6">600 Diamonds</option><option value="7">800 Diamonds</option><option value="8">1000 Diamonds</option></select><label for="price" class="self-center">Harga</label><input class="py-2 px-4 rounded-xl" type="text" name="price" id="price" readonly><div></div> -->
@@ -251,9 +251,9 @@
       produk = await produk.json();
       produk = produk.data;
       form.append(`
-        <label for="qty" class="self-center">Jumlah</label>
-        <select class="py-2 px-4 rounded-xl" name="qty" id="qty">
-          <option value="">Pilih Jumlah</option>
+        <label for="qty" class="self-center ">Jumlah</label>
+        <select class="py-2 px-4 rounded-xl " name="qty" id="qty">
+          <option value="" >Pilih Jumlah</option>
         </select>
       `);
       produk.forEach(prod => {
@@ -285,7 +285,7 @@
         <a href="purchase.html?id=${dat.id}">
           <div class="p-3 my-4 mx-5 rounded-xl bg-yellow-300 shadow-lg hover:drop-shadow-2xl hover:transform hover:scale-105">
             <div class="max-w-sm overflow-hidden">
-              <img class="w-full h-[200px] rounded-xl" src="${url_img + dat.id}">
+              <img class="w-full h-[50%] rounded-xl" src="${url_img + dat.id}">
               <div class="px-6 py-4">
                 <div class="font-bold text-xl" align="center">${dat.nama}</div>
               </div>

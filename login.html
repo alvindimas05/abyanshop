@@ -14,34 +14,42 @@
     <script src="global.js"></script>
 </head>
 <body>
-    <div class="flex items-center justify-center h-screen">
-        <div class="grid grid-cols-[580px_auto] w-[1000px] h-[700px] border border-black drop-shadow-5">
-            <div class="bg-orange-400"></div>
-            <div class="p-5">
-                <div class="mt-20 mb-16 text-4xl font-bold text-center">
-                    <div id="title" class="grid grid-cols-1">
-                        <span>WELCOME</span>
-                        <span class="my-2">TO</span>
-                        <div>
-                            <span class="text-[#ea7600]">ABYAN</span>
-                            <span class="text-[#2f4f4f]">SHOP</span>
-                        </div>
+    <div class="relative ">
+        <img src="asset/bg.png" class="w-full h-[100vh]">
+        <div class="absolute top-[70px] right-[180px]">
+            <div class="mt-20 mb-16 text-6xl font-bold text-center">
+                <div id="title" class="grid grid-cols-1">
+                    <div>
+                        <span class="text-[#ea7600]">ABYAN</span>
+                        <span class="text-[#2f4f4f]">SHOP</span>
                     </div>
+                    <span class="text-gray-700 text-base">*You need to login to be able to use this service.</span>
                 </div>
-                <label for="usn" class="inline-block absolute translate-x-[30px] -translate-y-[10px] bg-white px-1">Username</label>
-                <input type="text" name="usn" class="mx-2 mb-10 px-6 py-4 border border-black w-full outline-none rounded-full focus:placeholder:opacity-0" placeholder="example">
-                <label for="pass" class="inline-block absolute translate-x-[30px] -translate-y-[10px] bg-white px-1">Password</label>
-                <input type="password" name="pass" class="mx-2 mb-10 px-6 py-4 border border-black w-full outline-none rounded-full focus:placeholder:opacity-0" placeholder="example123">
+            </div>
+            <div class="text-lg">
+                <div class="grid grid-cols-1">
+                    <div>
+                        <label for="usn" class="inline-block absolute translate-x-[30px] -translate-y-[10px] bg-white px-1">Username</label>
+                        <input type="text" name="usn" class="mx-2 mb-10 px-6 py-4 border border-black w-[500px] outline-none rounded-full focus:placeholder:opacity-0" placeholder="example">
+                    </div>
+                    <div>           
+                        <label for="pass" class="inline-block absolute translate-x-[30px] -translate-y-[10px] bg-white px-1">Password</label>
+                        <input type="password" name="pass" class="mx-2 mb-10 px-6 py-4 border border-black w-[500px] outline-none rounded-full focus:placeholder:opacity-0" placeholder="example123">
+                    </div>
+
+                </div>
                 <div class="flex justify-center mb-3">
-                    <button class="text-center px-7 py-2 border border-orange-300 mx-auto rounded-full hover:bg-orange-500 hover:text-white hover:ease-in hover:duration-200" id="login">Login</button>
+                    <button class="text-center text-xl font-bold text-orange-400 px-9 py-3 border border-orange-300 mx-auto rounded-full hover:bg-orange-500 hover:text-white hover:ease-in hover:duration-200" id="login">Login</button>
                 </div>
-                <div id="register" class="flex justify-center">
-                    <span>New user?&nbsp;</span>
-                    <a href="register.html" class="text-center text-orange-400 underline">Create Account</a>
-                </div>
+            </div>
+                
+            <div class="flex justify-center">
+                <span>New user?&nbsp;</span>
+                <a href="register.html" class="text-center text-orange-700 hover:underline">Create Account</a>
             </div>
         </div>
     </div>
+
     <script>
         let isAdmin = false;
         async function click(e){
