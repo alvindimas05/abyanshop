@@ -15,8 +15,8 @@ Route::prefix("api")->group(function(){
     });
 
     Route::controller(PembelianController::class)->prefix("user")->group(function (){
-        Route::get("beli", "beli");
-        Route::post("riwayat", "riwayat");
+        Route::post("beli", "beli");
+        Route::get("riwayat", "riwayat");
         Route::post("top_up", "top_up");
     });
 
