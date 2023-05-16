@@ -30,8 +30,7 @@ class ProdukController extends Controller
             "id" => null,
             "nama" => $req->nama,
             "harga" => $req->harga,
-            "id_tipe" => $req->id_tipe,
-            "total_penjualan" => 0
+            "id_tipe" => $req->id_tipe
         ]);
         return $this->res->success();
     }
