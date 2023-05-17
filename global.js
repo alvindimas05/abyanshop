@@ -42,4 +42,5 @@ $(document).ready(() => {
             location.reload();
         });
     }
+    $('[data-collapse-toggle="navbar-search"]').css("display", "none");
 });
