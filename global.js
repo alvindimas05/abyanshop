@@ -42,5 +42,4 @@ $(document).ready(() => {
             location.reload();
         });
     }
-    $('button[data-collapse-toggle="navbar-search"]').css("display", "none");
 });
