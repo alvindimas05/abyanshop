@@ -42,5 +42,8 @@ $(document).ready(() => {
             location.reload();
         });
     }
+    if(location.pathname != "/" || location.pathname != "/index.html"){
+      $("#search-div").css("display", "none");
+    }
     $('[data-collapse-toggle="navbar-search"]').css("display", "none");
 });
