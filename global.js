@@ -21,7 +21,6 @@ $(document).ready(() => {
     let isAdmin = $.cookie("admin_id") != undefined;
     if ($.cookie("user_id") != undefined || isAdmin){
         $(".button-login").css("display","none");
-
         if(isAdmin){
             $("#nav-list").html("");
             $("#nav-list").append(`
@@ -42,6 +41,8 @@ $(document).ready(() => {
             location.reload();
         });
     }
+    if(!isAdmin && ["tipe", "produk"].some(v => location.pathname.includes(v)))
+      location.href = "/login.html";
     if(location.pathname != "/" || location.pathname != "/index.html"){
       $("#search-div").css("display", "none");
     }
