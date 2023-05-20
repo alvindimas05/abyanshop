@@ -81,8 +81,8 @@ public class MainActivity extends AppCompatActivity {
                         CardView card = (CardView) layout.getChildAt(j);
                         TextView text = (TextView) card.getChildAt(1);
 
-                        String oldText = text.getText().toString();
-                        card.setVisibility(oldText.contains(newText) && !oldText.equals("")
+                        String oldText = text.getText().toString().toLowerCase();
+                        card.setVisibility(oldText.contains(newText.toLowerCase()) && !oldText.equals("")
                                 ? View.VISIBLE : View.GONE);
                     }
                 }

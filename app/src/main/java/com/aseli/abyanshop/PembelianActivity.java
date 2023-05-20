@@ -58,7 +58,7 @@ public class PembelianActivity extends AppCompatActivity {
             ((TextView) layout.getChildAt(0)).setText(kolom);
             ((LinearLayout) findViewById(R.id.pembelian_inputs)).addView(layout);
         }
-        ((TextView) findViewById(R.id.pembelian_nama)).setText(extras.getString("nama"));
+        ((TextView) findViewById(R.id.pembelian_nama)).setText(extras.getString("namae"));
         JSONArray data = null;
         try {
             data = new PembelianTask(this, extras.getInt("id")).execute().get();
